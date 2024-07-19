@@ -20,24 +20,58 @@ export function ScheduleTablerow({
   const { dispatchRemoveElement, dispatchMarkElementAsFinished } =
     useContext(AddElementContext)
 
-  const colors = [
-    {
-      matematica: '#3366CC',
-      portugues: '#FF6600',
-      fisica: '#FFCC00',
-      biologia: '#33CC33',
-      geografia: '#669933',
-      quimica: '#CC3333',
-      historia: '#993399',
-      sociologia: '#FF99CC',
-      edfisica: '#66CCCC',
-      espanhol: '#FF3366',
-      eletricidade: '#FFAE69',
-      eletronica_digital: '#666699',
-      desenho: '#CC6600',
-      informatica: '#999999',
-    },
-  ]
+  function color(color: string) {
+    switch (color) {
+      case 'Matemática':
+        return '#3366cc'
+      case 'Português':
+        return '#FF6600'
+      case 'Física':
+        return '#FFCC00'
+      case 'Biologia':
+        return '#33CC33'
+      case 'Geografia':
+        return '#669933'
+      case 'Química':
+        return '#CC3333'
+      case 'História':
+        return '#993399'
+      case 'Sociologia':
+        return '#FF99CC'
+      case 'Ed.Física':
+        return '#66CCCC'
+      case 'Espanhol':
+        return '#FF3366'
+      case 'Eletricidade':
+        return '#FFAE69'
+      case 'Eletrônica Digital':
+        return '#666699'
+      case 'Desenho':
+        return '#CC6600'
+      case 'Informática':
+        return '#999999'
+
+      default:
+        return '#29292e'
+    }
+  }
+
+  // const colors = {
+  //   matematica: '#3366CC',
+  //   portugues: '#FF6600',
+  //   fisica: '#FFCC00',
+  //   biologia: '#33CC33',
+  //   geografia: '#669933',
+  //   quimica: '#CC3333',
+  //   historia: '#993399',
+  //   sociologia: '#FF99CC',
+  //   edfisica: '#66CCCC',
+  //   espanhol: '#FF3366',
+  //   eletricidade: '#FFAE69',
+  //   eletronica_digital: '#666699',
+  //   desenho: '#CC6600',
+  //   informatica: '#999999',
+  // }
 
   if (
     selectedSubject ===
@@ -49,15 +83,16 @@ export function ScheduleTablerow({
         wordBreak="break-all"
         style={{
           textDecoration: isFinished ? 'line-through' : 'none',
-          background: isFinished
-            ? '#a5eea0'
-            : colors[0][
-                String(selectedSubject)
-                  .toLowerCase()
-                  .normalize('NFD')
-                  .replace(/\p{Mn}/gu, '')
-                  .replace(/\s+/g, '_')
-              ],
+          background: isFinished ? '#a5eea0' : color(selectedSubject),
+          // background: isFinished
+          //   ? '#a5eea0'
+          //   : colors[
+          //       selectedSubject
+          //         .toLowerCase()
+          //         .normalize('NFD')
+          //         .replace(/\p{Mn}/gu, '')
+          //         .replace(/\s+/g, '_')
+          //     ],
           opacity: isFinished ? '0.6' : '1',
         }}
       >

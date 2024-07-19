@@ -37,7 +37,7 @@ export function AddElementInSchedule() {
     selectedSubject: z.string(),
   })
 
-  const { handleSubmit, register, reset } = useForm({
+  const { handleSubmit, register, reset } = useForm<FormData>({
     resolver: zodResolver(scheduleInputsSchema),
   })
 
