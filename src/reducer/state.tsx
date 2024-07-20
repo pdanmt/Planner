@@ -1,13 +1,13 @@
 import { produce } from 'immer'
-import { FormData } from '../pages/form-add-in-schedule'
+import { FormData } from '../pages/form-add-in-planner'
 
 export function ElementsState(state: FormData[], action: any) {
   switch (action.type) {
-    case 'ADD_ELEMENT_IN_SCHEDULE':
+    case 'ADD_ELEMENT_IN_PLANNER':
       return produce(state, (draft) => {
         draft.push(action.payload)
       })
-    case 'REMOVE_ELEMENT_IN_SCHEDULE': {
+    case 'REMOVE_ELEMENT_IN_PLANNER': {
       const indexItemToRemove = state.findIndex(
         ({ id }) => id === action.payload,
       )

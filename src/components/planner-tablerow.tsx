@@ -1,24 +1,27 @@
-import { Tr, Td, Icon } from '@chakra-ui/react'
-import { CheckFat, Trash, X } from '@phosphor-icons/react'
-import { options } from '../pages/form-add-in-schedule'
+import { Tr, Td, Icon, useDisclosure } from '@chakra-ui/react'
+import { CheckFat, MagnifyingGlass, Trash, X } from '@phosphor-icons/react'
+import { options } from '../pages/form-add-in-planner'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/add-element-context'
+import { ContentModal } from './content-modal'
 
-interface ScheduleTablerowProps {
+interface PlannerTablerowProps {
   activitie: string
   selectedSubject: string
   id: number
   isFinished?: boolean
 }
 
-export function ScheduleTablerow({
+export function PlannerTablerow({
   activitie,
   selectedSubject,
   id,
   isFinished,
-}: ScheduleTablerowProps) {
+}: PlannerTablerowProps) {
   const { dispatchRemoveElement, dispatchMarkElementAsFinished } =
     useContext(AddElementContext)
+
+  const { onOpen } = useDisclosure()
 
   function color(color: string) {
     switch (color) {
@@ -133,6 +136,19 @@ export function ScheduleTablerow({
             onClick={() => dispatchRemoveElement(id)}
           />
         </Td>
+        <Td>
+          <Icon
+            _hover={{ transition: '0.3s', background: '#121214' }}
+            as={MagnifyingGlass}
+            border="1px solid #121214"
+            borderRadius="6px"
+            p="1rem"
+            cursor="pointer"
+            fontSize={22}
+            onClick={onOpen}
+          />
+        </Td>
+        <ContentModal onOpen={onOpen} />
       </Tr>
     )
   }

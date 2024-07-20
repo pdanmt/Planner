@@ -29,26 +29,26 @@ export const options = [
   { value: '14', label: 'Informática' },
 ]
 
-export function AddElementInSchedule() {
+export function AddElementInPlanner() {
   const { dispatchAddElement } = useContext(AddElementContext)
 
-  const scheduleInputsSchema = z.object({
+  const plannerInputsSchema = z.object({
     addActivities: z.string(),
     selectedSubject: z.string(),
   })
 
   const { handleSubmit, register, reset } = useForm<FormData>({
-    resolver: zodResolver(scheduleInputsSchema),
+    resolver: zodResolver(plannerInputsSchema),
   })
 
-  function handleAddElementInSchedule(data: FormData) {
+  function handleAddElementInPlanner(data: FormData) {
     data.id = new Date().getTime()
     dispatchAddElement(data)
     reset()
   }
 
   return (
-    <form onSubmit={handleSubmit(handleAddElementInSchedule)}>
+    <form onSubmit={handleSubmit(handleAddElementInPlanner)}>
       <Box
         display="flex"
         flexDirection="column"

@@ -9,9 +9,9 @@ import {
 } from '@chakra-ui/react'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/add-element-context'
-import { options } from './form-add-in-schedule'
+import { options } from './form-add-in-planner'
 
-export function Schedule() {
+export function Planner() {
   const { elements } = useContext(AddElementContext)
 
   return (

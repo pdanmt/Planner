@@ -21,12 +21,12 @@ export function Header() {
           </CustomNavLink>
         </ToolTipComponent>
         <ToolTipComponent label="Agenda completa">
-          <CustomNavLink to={'/everything-on-schedule'}>
+          <CustomNavLink to={'/everything-on-planner'}>
             <Notebook size="1.5rem" cursor="pointer" />
           </CustomNavLink>
         </ToolTipComponent>
         <ToolTipComponent label="Agenda em matérias">
-          <CustomNavLink to={'/schedule'}>
+          <CustomNavLink to={'/planner'}>
             <BookmarkSimple size="1.5rem" cursor="pointer" />
           </CustomNavLink>
         </ToolTipComponent>

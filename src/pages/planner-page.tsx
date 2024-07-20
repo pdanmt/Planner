@@ -1,9 +1,9 @@
 import { Box, Table, Tbody, Text, Th, Thead, Tr } from '@chakra-ui/react'
-import { ScheduleTablerow } from '../components/schedule-tablerow'
+import { PlannerTablerow } from '../components/planner-tablerow'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/add-element-context'
 
-export function EverythingOnSchedule() {
+export function EverythingOnPlanner() {
   const { elements } = useContext(AddElementContext)
   return (
     <Box paddingTop="3.5rem" w={{ base: '100%', md: '80%', lg: '70%' }}>
@@ -46,7 +46,7 @@ export function EverythingOnSchedule() {
           >
             {elements.map(
               ({ addActivities, selectedSubject, id, isFinished }) => (
-                <ScheduleTablerow
+                <PlannerTablerow
                   key={id}
                   activitie={addActivities}
                   selectedSubject={selectedSubject}

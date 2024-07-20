@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { PageBase } from './layouts/base'
-import { AddElementInSchedule } from './pages/form-add-in-schedule'
-import { EverythingOnSchedule } from './pages/schedule-page'
-import { Schedule } from './pages/schedule-accordion-page'
+import { AddElementInPlanner } from './pages/form-add-in-planner'
+import { EverythingOnPlanner } from './pages/planner-page'
+import { Planner } from './pages/planner-accordion-page'
 
 export const AppRoutes = createBrowserRouter([
   {
@@ -11,15 +11,15 @@ export const AppRoutes = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <AddElementInSchedule />,
+        element: <AddElementInPlanner />,
       },
       {
-        path: '/everything-on-schedule',
-        element: <EverythingOnSchedule />,
+        path: '/everything-on-planner',
+        element: <EverythingOnPlanner />,
       },
       {
-        path: '/schedule',
-        element: <Schedule />,
+        path: '/planner',
+        element: <Planner />,
       },
     ],
   },

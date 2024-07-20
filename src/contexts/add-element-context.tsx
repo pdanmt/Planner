@@ -5,7 +5,7 @@ import {
   removeElementAction,
 } from '../reducer/actions'
 import { ElementsState } from '../reducer/state'
-import { FormData } from '../pages/form-add-in-schedule'
+import { FormData } from '../pages/form-add-in-planner'
 
 interface AddElementContextProps {
   dispatchAddElement: (data: FormData) => void
@@ -24,7 +24,7 @@ export function AddElementContextProvider({
   children,
 }: AddElementContextProviderProps) {
   const [elements, dispatch] = useReducer(ElementsState, [], (initialState) => {
-    const oldStorage = localStorage.getItem('@schedule-1.0:tasks')
+    const oldStorage = localStorage.getItem('@planner-1.0:tasks')
     if (oldStorage) {
       return JSON.parse(oldStorage)
     }
@@ -33,7 +33,7 @@ export function AddElementContextProvider({
   })
 
   useEffect(() => {
-    localStorage.setItem('@schedule-1.0:tasks', JSON.stringify(elements))
+    localStorage.setItem('@planner-1.0:tasks', JSON.stringify(elements))
   }, [elements])
 
   function dispatchAddElement(data: FormData) {
