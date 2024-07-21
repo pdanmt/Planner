@@ -5,9 +5,9 @@ import { Outlet } from 'react-router-dom'
 export function PageBase() {
   return (
     <Box
-      w="80vw"
+      minW={{ base: '95vw', md: '80vw', lg: '75vw' }}
       minH="60vh"
-      padding="1.5rem"
+      padding={{ base: '1rem', md: '1rem', lg: '1.5rem' }}
       bg="secondary"
       borderRadius="8px"
       display="flex"

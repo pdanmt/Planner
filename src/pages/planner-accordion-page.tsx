@@ -10,6 +10,7 @@ import {
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/add-element-context'
 import { options } from './form-add-in-planner'
+import { ContentModal } from '../components/content-modal'
 
 export function Planner() {
   const { elements } = useContext(AddElementContext)
@@ -32,23 +33,24 @@ export function Planner() {
             </AccordionButton>
           </h1>
           <AccordionPanel>
-            <Box
-              background="gray6"
-              borderRadius="8px"
-              p="1rem"
-              display="flex"
-              flexDirection="column"
-              gap="1rem"
-            >
-              {elements.length === 0 ? (
-                <Text textAlign="center">Nada para fazer...</Text>
-              ) : (
-                elements.map(
-                  ({ addActivities, id, selectedSubject, isFinished }) => {
-                    if (selectedSubject === label) {
-                      return (
+            <Box background="gray6" borderRadius="8px" p="1rem">
+              {elements.map(
+                ({
+                  addActivities,
+                  id,
+                  selectedSubject,
+                  isFinished,
+                  contentTask,
+                }) => {
+                  if (selectedSubject === label) {
+                    return (
+                      <Box
+                        key={id}
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
                         <Text
-                          key={id}
                           wordBreak="break-all"
                           style={{
                             textDecoration: isFinished
@@ -58,11 +60,15 @@ export function Planner() {
                         >
                           <strong>Tarefa:</strong> {addActivities}
                         </Text>
-                      )
-                    }
-                    return ''
-                  },
-                )
+                        <ContentModal
+                          contentTask={contentTask}
+                          task={addActivities}
+                        />
+                      </Box>
+                    )
+                  }
+                  return ''
+                },
               )}
             </Box>
           </AccordionPanel>

@@ -8,6 +8,7 @@ import { AddElementContext } from '../contexts/add-element-context'
 export interface FormData {
   addActivities: string
   selectedSubject: string
+  contentTask: string
   id: number
   isFinished?: boolean
 }
@@ -35,6 +36,7 @@ export function AddElementInPlanner() {
   const plannerInputsSchema = z.object({
     addActivities: z.string(),
     selectedSubject: z.string(),
+    contentTask: z.string(),
   })
 
   const { handleSubmit, register, reset } = useForm<FormData>({
@@ -42,7 +44,8 @@ export function AddElementInPlanner() {
   })
 
   function handleAddElementInPlanner(data: FormData) {
-    data.id = new Date().getTime()
+    const id = new Date().getTime() * new Date().getMilliseconds()
+    data.id = id
     dispatchAddElement(data)
     reset()
   }
@@ -66,6 +69,18 @@ export function AddElementInPlanner() {
           w="60vw"
           required
           {...register('addActivities')}
+        />
+
+        <Input
+          color="gray1"
+          border="1px solid"
+          borderColor="primary"
+          placeholder="Digite o conteúdo da atividade"
+          variant="ghost"
+          bg="transparent"
+          w="60vw"
+          required
+          {...register('contentTask')}
         />
 
         <Select

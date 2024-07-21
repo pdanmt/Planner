@@ -45,13 +45,20 @@ export function EverythingOnPlanner() {
             }}
           >
             {elements.map(
-              ({ addActivities, selectedSubject, id, isFinished }) => (
+              ({
+                addActivities,
+                selectedSubject,
+                id,
+                isFinished,
+                contentTask,
+              }) => (
                 <PlannerTablerow
                   key={id}
                   activitie={addActivities}
                   selectedSubject={selectedSubject}
                   id={id}
                   isFinished={isFinished}
+                  contentTask={contentTask}
                 />
               ),
             )}
