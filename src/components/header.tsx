@@ -31,17 +31,17 @@ export function Header() {
         paddingTop="2rem"
       >
         <Box display="flex" alignItems="center" gap="1rem">
-          <ToolTipComponent label="Adicionar">
-            <CustomNavLink to={'/'}>
+          <CustomNavLink to={'/'}>
+            <ToolTipComponent label="Adicionar">
               <FilePlus size="1.5rem" cursor="pointer" />
-            </CustomNavLink>
-          </ToolTipComponent>
+            </ToolTipComponent>
+          </CustomNavLink>
 
-          <ToolTipComponent label="Agenda em matérias">
-            <CustomNavLink to={'/planner'}>
+          <CustomNavLink to={'/planner'}>
+            <ToolTipComponent label="Agenda em matérias">
               <BookmarkSimple size="1.5rem" cursor="pointer" />
-            </CustomNavLink>
-          </ToolTipComponent>
+            </ToolTipComponent>
+          </CustomNavLink>
         </Box>
         <Menu>
           <MenuButton
