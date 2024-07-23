@@ -32,8 +32,8 @@ export function ContentModal({ task, contentTask }: ContentModalProps) {
         <MagnifyingGlass size={22} />
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent background="primary">
+        <ModalOverlay background="#00000099" />
+        <ModalContent background="primary" boxShadow="0 0 100px #28282b">
           <ModalHeader color="gray1">{task}</ModalHeader>
           <ModalCloseButton color="#fff" position="absolute" top="1rem" />
           <ModalBody color="gray1">{contentTask}</ModalBody>

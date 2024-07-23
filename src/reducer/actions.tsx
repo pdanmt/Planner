@@ -1,4 +1,4 @@
-import { FormData } from '../pages/form-add-in-planner'
+import { FormData } from '../components/add-element'
 
 export function addElementAction(data: FormData) {
   return {

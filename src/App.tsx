@@ -9,17 +9,13 @@ export function App() {
     <ChakraProvider theme={DefaultTheme}>
       <AddElementContextProvider>
         <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
           boxSizing="border-box"
           margin="0"
           padding="0"
-          bg="primary"
+          bg="secondary"
           minH="100vh"
           color="white"
           fontFamily="Roboto, monospace"
-          p="2rem"
         >
           <RouterProvider router={AppRoutes} />
         </Box>

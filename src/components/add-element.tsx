@@ -10,7 +10,7 @@ export interface FormData {
   selectedSubject: string
   contentTask: string
   id: number
-  isFinished?: boolean
+  isFinished: boolean
 }
 
 export const options = [
@@ -30,7 +30,7 @@ export const options = [
   { value: '14', label: 'Informática' },
 ]
 
-export function AddElementInPlanner() {
+export function AddElement() {
   const { dispatchAddElement } = useContext(AddElementContext)
 
   const plannerInputsSchema = z.object({
@@ -46,18 +46,20 @@ export function AddElementInPlanner() {
   function handleAddElementInPlanner(data: FormData) {
     const id = new Date().getTime() * new Date().getMilliseconds()
     data.id = id
+    data.isFinished = false
     dispatchAddElement(data)
     reset()
   }
-
   return (
     <form onSubmit={handleSubmit(handleAddElementInPlanner)}>
       <Box
         display="flex"
-        flexDirection="column"
         alignItems="center"
+        flexDir={{ base: 'column', lg: 'row' }}
         justifyContent="center"
         gap="1rem"
+        w={{ base: '90%', md: '80%', lg: '70%' }}
+        margin="0 auto 1rem"
       >
         <Input
           color="gray1"
@@ -66,7 +68,7 @@ export function AddElementInPlanner() {
           placeholder="Adicione uma atividade"
           variant="ghost"
           bg="transparent"
-          w="60vw"
+          w={{ base: '90vw', md: '80vw', lg: '60vw' }}
           required
           {...register('addActivities')}
         />
@@ -78,7 +80,7 @@ export function AddElementInPlanner() {
           placeholder="Digite o conteúdo da atividade"
           variant="ghost"
           bg="transparent"
-          w="60vw"
+          w={{ base: '90vw', md: '80vw', lg: '60vw' }}
           required
           {...register('contentTask')}
         />
@@ -90,7 +92,7 @@ export function AddElementInPlanner() {
           borderColor="primary"
           background="transparent"
           required
-          w="60vw"
+          w={{ base: '90vw', md: '80vw', lg: '60vw' }}
           placeholder="Selecione uma matéria"
           sx={{
             option: {
@@ -105,11 +107,14 @@ export function AddElementInPlanner() {
         </Select>
 
         <Button
+          variant="ghost"
           type="submit"
-          background="green1"
-          color="white"
+          border="1px solid"
+          borderColor="green2"
+          color="green1"
+          fontWeight="bold"
           p="0 5rem"
-          _hover={{ background: 'green2' }}
+          _hover={{ background: 'green2', color: '#fff' }}
         >
           Enviar
         </Button>

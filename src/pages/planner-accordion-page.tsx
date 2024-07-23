@@ -9,71 +9,59 @@ import {
 } from '@chakra-ui/react'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/add-element-context'
-import { options } from './form-add-in-planner'
-import { ContentModal } from '../components/content-modal'
 
 export function Planner() {
   const { elements } = useContext(AddElementContext)
+  const pendingElements = elements.filter(
+    ({ isFinished }) => isFinished === false,
+  )
+  const arrayUniqueSubjects = Array.from(
+    new Set(pendingElements.map(({ selectedSubject }) => selectedSubject)),
+  )
 
   return (
-    <Accordion
-      w={{ base: '100%', md: '95%', lg: '90%' }}
-      paddingTop="7rem"
-      allowMultiple
-      margin="0 auto"
-    >
-      {options.map(({ label, value }) => (
-        <AccordionItem key={value} p="0.65rem 0">
-          <h1>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
-                {label}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h1>
-          <AccordionPanel>
-            <Box background="gray6" borderRadius="8px" p="1rem">
-              {elements.map(
-                ({
-                  addActivities,
-                  id,
-                  selectedSubject,
-                  isFinished,
-                  contentTask,
-                }) => {
-                  if (selectedSubject === label) {
+    <Box w="90%" margin="0 auto">
+      <Box paddingBottom="2rem">
+        {pendingElements.length === 0 ? (
+          <Text fontSize="1.5rem" paddingBottom="1rem" textAlign="center">
+            Nada para fazer...
+          </Text>
+        ) : (
+          <Text fontSize="1.5rem" paddingBottom="1rem">
+            Matérias com atividades pendentes:
+          </Text>
+        )}
+        <Accordion allowMultiple>
+          {arrayUniqueSubjects.map((_, index) => (
+            <AccordionItem key={index} p="0.65rem 0">
+              <h1>
+                <AccordionButton>
+                  <Box as="span" flex="1" textAlign="left">
+                    {arrayUniqueSubjects[index]}
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h1>
+              {pendingElements.map(
+                ({ addActivities, contentTask, id, selectedSubject }) => {
+                  if (selectedSubject === arrayUniqueSubjects[index]) {
                     return (
-                      <Box
-                        key={id}
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                      >
-                        <Text
-                          wordBreak="break-all"
-                          style={{
-                            textDecoration: isFinished
-                              ? 'line-through'
-                              : 'none',
-                          }}
-                        >
-                          <strong>Tarefa:</strong> {addActivities}
-                        </Text>
-                        <ContentModal
-                          contentTask={contentTask}
-                          task={addActivities}
-                        />
-                      </Box>
+                      <AccordionPanel key={id}>
+                        <Box p="1rem" bg="gray6" borderRadius="8px">
+                          <Text wordBreak="break-all">
+                            <strong>{addActivities}:</strong> {contentTask}
+                          </Text>
+                        </Box>
+                      </AccordionPanel>
                     )
                   }
                   return ''
                 },
               )}
-            </Box>
-          </AccordionPanel>
-        </AccordionItem>
-      ))}
-    </Accordion>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </Box>
+    </Box>
   )
 }

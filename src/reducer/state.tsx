@@ -1,5 +1,5 @@
 import { produce } from 'immer'
-import { FormData } from '../pages/form-add-in-planner'
+import { FormData } from '../components/add-element'
 
 export function ElementsState(state: FormData[], action: any) {
   switch (action.type) {

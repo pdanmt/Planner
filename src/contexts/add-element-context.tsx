@@ -5,12 +5,13 @@ import {
   removeElementAction,
 } from '../reducer/actions'
 import { ElementsState } from '../reducer/state'
-import { FormData } from '../pages/form-add-in-planner'
+import { FormData } from '../components/add-element'
 
 interface AddElementContextProps {
   dispatchAddElement: (data: FormData) => void
   dispatchRemoveElement: (id: number) => void
   dispatchMarkElementAsFinished: (id: number) => void
+  HighContrast: (index: string) => string
   elements: FormData[]
 }
 
@@ -48,6 +49,27 @@ export function AddElementContextProvider({
     dispatch(markElementAsFinishedAction(id))
   }
 
+  function HighContrast(index: string) {
+    const colors = {
+      matematica: '#3366CC',
+      portugues: '#FF6600',
+      fisica: '#FFCC00',
+      biologia: '#33CC33',
+      geografia: '#669933',
+      quimica: '#CC3333',
+      historia: '#993399',
+      sociologia: '#FF99CC',
+      edfisica: '#66CCCC',
+      espanhol: '#FF3366',
+      eletricidade: '#FFAE69',
+      eletronica_digital: '#666699',
+      desenho: '#CC6600',
+      informatica: '#999999',
+    }
+
+    return colors[index as keyof typeof colors]
+  }
+
   return (
     <AddElementContext.Provider
       value={{
@@ -55,6 +77,7 @@ export function AddElementContextProvider({
         elements,
         dispatchRemoveElement,
         dispatchMarkElementAsFinished,
+        HighContrast,
       }}
     >
       {children}

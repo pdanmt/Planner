@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { PageBase } from './layouts/base'
-import { AddElementInPlanner } from './pages/form-add-in-planner'
+import { AddElementInPlanner } from './pages/home'
 import { EverythingOnPlanner } from './pages/planner-page'
 import { Planner } from './pages/planner-accordion-page'
 
