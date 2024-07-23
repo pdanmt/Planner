@@ -1,4 +1,4 @@
-import { Box, Tooltip } from '@chakra-ui/react'
+import { Tooltip } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 interface ToolTipComponentProps {
@@ -15,20 +15,9 @@ export function ToolTipComponent({ children, label }: ToolTipComponentProps) {
       padding="0.5rem 1rem"
       borderRadius="6px"
       bg="secondary"
-      marginTop="0.3rem"
+      marginTop="0.8rem"
     >
-      <Box
-        p="0 0.5rem 6px"
-        color="white"
-        borderBottom="2px solid transparent"
-        _hover={{
-          color: 'green1',
-          borderBottom: '2px solid',
-          borderColor: 'green1',
-        }}
-      >
-        {children}
-      </Box>
+      {children}
     </Tooltip>
   )
 }

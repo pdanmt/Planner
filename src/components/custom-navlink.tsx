@@ -14,7 +14,18 @@ export function CustomNavLink({ to, children }: CustomNavLinkProps) {
 
   return (
     <Link to={to}>
-      <Box color={isActive ? 'green.500' : '#fff'}>{children}</Box>
+      <Box
+        color={isActive ? 'green.500' : '#fff'}
+        p="0 0.5rem 6px"
+        borderBottom="2px solid transparent"
+        _hover={{
+          color: 'green1',
+          borderBottom: '2px solid',
+          borderColor: 'green1',
+        }}
+      >
+        {children}
+      </Box>
     </Link>
   )
 }
