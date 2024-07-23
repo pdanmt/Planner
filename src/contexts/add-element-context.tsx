@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useEffect, useReducer } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react'
 import {
   addElementAction,
   markElementAsFinishedAction,
@@ -12,7 +18,9 @@ interface AddElementContextProps {
   dispatchRemoveElement: (id: number) => void
   dispatchMarkElementAsFinished: (id: number) => void
   HighContrast: (index: string) => string
+  SetHighContrast: () => void
   elements: FormData[]
+  highContrast: boolean
 }
 
 interface AddElementContextProviderProps {
@@ -33,11 +41,18 @@ export function AddElementContextProvider({
     return initialState
   })
 
+  const getLocalStorageHighContrast =
+    localStorage.getItem('planner-1.0:high-contrast') === 'true'
+  const [highContrast, setHighContrast] = useState(getLocalStorageHighContrast)
+
   useEffect(() => {
     localStorage.setItem('@planner-1.0:tasks', JSON.stringify(elements))
   }, [elements])
 
   function dispatchAddElement(data: FormData) {
+    const id = new Date().getTime() * new Date().getMilliseconds()
+    data.id = id
+    data.isFinished = false
     dispatch(addElementAction(data))
   }
 
@@ -67,7 +82,18 @@ export function AddElementContextProvider({
       informatica: '#999999',
     }
 
-    return colors[index as keyof typeof colors]
+    if (highContrast) {
+      return colors[index as keyof typeof colors]
+    }
+    return '#313138'
+  }
+
+  function SetHighContrast() {
+    setHighContrast((state) => !state)
+    localStorage.setItem(
+      'planner-1.0:high-contrast',
+      JSON.stringify(!highContrast),
+    )
   }
 
   return (
@@ -78,6 +104,8 @@ export function AddElementContextProvider({
         dispatchRemoveElement,
         dispatchMarkElementAsFinished,
         HighContrast,
+        SetHighContrast,
+        highContrast,
       }}
     >
       {children}

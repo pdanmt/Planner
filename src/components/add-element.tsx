@@ -44,9 +44,6 @@ export function AddElement() {
   })
 
   function handleAddElementInPlanner(data: FormData) {
-    const id = new Date().getTime() * new Date().getMilliseconds()
-    data.id = id
-    data.isFinished = false
     dispatchAddElement(data)
     reset()
   }

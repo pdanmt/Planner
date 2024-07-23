@@ -4,7 +4,7 @@ export const DefaultTheme = extendTheme({
   colors: {
     primary: '#121214',
     secondary: '#202024',
-    defaultColor: '#fff',
+    white: '#fff',
 
     red1: '#f03847',
     red2: '#7A1921',
