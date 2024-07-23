@@ -1,5 +1,6 @@
 import {
   Button,
+  Icon,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -22,15 +23,14 @@ export function ContentModal({ task, contentTask }: ContentModalProps) {
 
   return (
     <>
-      <Button
+      <Icon
+        as={MagnifyingGlass}
         onClick={onOpen}
-        variant="ghost"
         color="#fff"
-        _hover={{ background: 'gray2', color: 'primary' }}
-        p={0}
-      >
-        <MagnifyingGlass size={22} />
-      </Button>
+        borderRadius="6px"
+        _hover={{ color: 'primary' }}
+        fontSize={22}
+      />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay background="#00000099" />
         <ModalContent background="primary" boxShadow="0 0 100px #28282b">

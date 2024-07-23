@@ -10,9 +10,9 @@ export function Summary() {
   return (
     <Box
       display="flex"
-      margin="-3rem 0 3rem"
+      margin="-3.5rem 0 3rem"
       gap={{ base: '1rem', lg: '2rem' }}
-      justifyContent={{ base: 'flex-start', lg: 'center' }}
+      justifyContent={{ base: 'flex-start', sm: 'center', lg: 'center' }}
       overflow="auto"
     >
       <Box

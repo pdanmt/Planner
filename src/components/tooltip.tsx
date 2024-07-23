@@ -11,11 +11,11 @@ export function ToolTipComponent({ children, label }: ToolTipComponentProps) {
     <Tooltip
       label={label}
       hasArrow
-      placement="top"
+      placement="bottom"
       padding="0.5rem 1rem"
       borderRadius="6px"
-      bg="primary"
-      marginBottom="0.3rem"
+      bg="secondary"
+      marginTop="0.3rem"
     >
       <Box
         p="0 0.5rem 6px"

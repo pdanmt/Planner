@@ -31,7 +31,6 @@ export function LargeScreenTable() {
             }) => (
               <Tr
                 borderTop="10px solid #202024"
-                wordBreak="break-all"
                 key={id}
                 style={{
                   textDecoration: isFinished ? 'line-through' : 'none',

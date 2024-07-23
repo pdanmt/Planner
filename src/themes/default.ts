@@ -22,4 +22,7 @@ export const DefaultTheme = extendTheme({
 
     yellow: '#fba94c',
   },
+  breakpoints: {
+    sm: '560px',
+  },
 })

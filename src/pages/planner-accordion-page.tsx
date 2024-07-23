@@ -48,7 +48,7 @@ export function Planner() {
                     return (
                       <AccordionPanel key={id}>
                         <Box p="1rem" bg="gray6" borderRadius="8px">
-                          <Text wordBreak="break-all">
+                          <Text textAlign="justify">
                             <strong>{addActivities}:</strong> {contentTask}
                           </Text>
                         </Box>
