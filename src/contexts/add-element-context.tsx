@@ -12,6 +12,7 @@ import {
 } from '../reducer/actions'
 import { ElementsState } from '../reducer/state'
 import { FormData } from '../components/add-element'
+import { DateFormatter } from '../utils/formatter'
 
 interface AddElementContextProps {
   dispatchAddElement: (data: FormData) => void
@@ -53,6 +54,7 @@ export function AddElementContextProvider({
     const id = new Date().getTime() * new Date().getMilliseconds()
     data.id = id
     data.isFinished = false
+    data.createdAt = DateFormatter.format(new Date())
     dispatch(addElementAction(data))
   }
 

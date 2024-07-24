@@ -15,7 +15,14 @@ export function SmallScreenContent() {
   return (
     <Box display="flex" flexDir="column" gap="1rem">
       {elements.map(
-        ({ id, addActivities, selectedSubject, isFinished, contentTask }) => (
+        ({
+          id,
+          addActivities,
+          selectedSubject,
+          isFinished,
+          contentTask,
+          createdAt,
+        }) => (
           <Box
             key={id}
             display={{ base: 'flex', lg: 'none' }}
@@ -42,7 +49,12 @@ export function SmallScreenContent() {
             <Box display="flex" justifyContent="space-between">
               <Text fontSize="1.3rem">{selectedSubject}</Text>
               <Box display="flex" alignItems="center" gap="1rem">
-                <ContentModal contentTask={contentTask} task={addActivities} />
+                <ContentModal
+                  contentTask={contentTask}
+                  task={addActivities}
+                  selectedSubject={selectedSubject}
+                  createdAt={createdAt}
+                />
                 {isFinished ? (
                   <Icon
                     as={X}

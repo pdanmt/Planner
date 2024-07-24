@@ -43,13 +43,26 @@ export function Planner() {
                 </AccordionButton>
               </h1>
               {pendingElements.map(
-                ({ addActivities, contentTask, id, selectedSubject }) => {
+                ({
+                  addActivities,
+                  contentTask,
+                  id,
+                  selectedSubject,
+                  createdAt,
+                }) => {
                   if (selectedSubject === arrayUniqueSubjects[index]) {
                     return (
                       <AccordionPanel key={id}>
                         <Box p="1rem" bg="gray6" borderRadius="8px">
                           <Text textAlign="justify">
                             <strong>{addActivities}:</strong> {contentTask}
+                          </Text>
+                          <Text
+                            color="gray3"
+                            fontSize="0.8rem"
+                            paddingTop="1rem"
+                          >
+                            {createdAt}
                           </Text>
                         </Box>
                       </AccordionPanel>

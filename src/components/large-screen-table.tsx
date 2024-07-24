@@ -28,6 +28,7 @@ export function LargeScreenTable() {
               id,
               isFinished,
               contentTask,
+              createdAt,
             }) => (
               <Tr
                 borderTop="10px solid #202024"
@@ -46,9 +47,9 @@ export function LargeScreenTable() {
                   opacity: isFinished ? '0.6' : '1',
                 }}
               >
-                <Td minW={{ base: '20rem', lg: '100%' }}>{selectedSubject}</Td>
-                <Td minW={{ base: '20rem', lg: '100%' }}>{addActivities}</Td>
-                <Td minW="10%">
+                <Td minW="20rem">{selectedSubject}</Td>
+                <Td minW="20rem">{addActivities}</Td>
+                <Td minW="1rem">
                   {isFinished ? (
                     <Icon
                       as={X}
@@ -72,7 +73,7 @@ export function LargeScreenTable() {
                     />
                   )}
                 </Td>
-                <Td minW="10%">
+                <Td minW="1rem">
                   <Icon
                     as={Trash}
                     _hover={{
@@ -83,10 +84,12 @@ export function LargeScreenTable() {
                     onClick={() => dispatchRemoveElement(id)}
                   />
                 </Td>
-                <Td>
+                <Td minW="1rem">
                   <ContentModal
                     task={addActivities}
                     contentTask={contentTask}
+                    selectedSubject={selectedSubject}
+                    createdAt={createdAt}
                   />
                 </Td>
               </Tr>

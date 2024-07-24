@@ -1,12 +1,12 @@
 import { RouterProvider } from 'react-router-dom'
 import { AppRoutes } from './router'
 import { Box, ChakraProvider } from '@chakra-ui/react'
-import { DefaultTheme } from './themes/default'
+import { DarkTheme } from './themes/dark-theme'
 import { AddElementContextProvider } from './contexts/add-element-context'
 
 export function App() {
   return (
-    <ChakraProvider theme={DefaultTheme}>
+    <ChakraProvider theme={DarkTheme}>
       <AddElementContextProvider>
         <Box
           boxSizing="border-box"
