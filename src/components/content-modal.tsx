@@ -49,7 +49,7 @@ export function ContentModal({
                 {selectedSubject} - {task}
               </Text>
               <Text fontSize="0.9rem" fontWeight="400" color="gray3">
-                {createdAt}
+                Criado em: {createdAt}
               </Text>
             </Box>
           </ModalHeader>
