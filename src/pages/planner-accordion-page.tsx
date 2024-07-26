@@ -62,7 +62,7 @@ export function Planner() {
                             fontSize="0.8rem"
                             paddingTop="1rem"
                           >
-                            {createdAt}
+                            Criado em: {createdAt}
                           </Text>
                         </Box>
                       </AccordionPanel>

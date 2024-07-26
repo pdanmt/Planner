@@ -76,7 +76,7 @@ export function AddElementContextProvider({
       quimica: '#CC3333',
       historia: '#993399',
       sociologia: '#FF99CC',
-      edfisica: '#66CCCC',
+      'ed.fisica': '#66CCCC',
       espanhol: '#FF3366',
       eletricidade: '#FFAE69',
       eletronica_digital: '#666699',

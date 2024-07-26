@@ -11,12 +11,13 @@ export function Summary() {
     <Box
       display="flex"
       margin="-3.5rem 0 3rem"
+      marginLeft={{ base: '8px', sm: '0' }}
       gap={{ base: '1rem', lg: '2rem' }}
       justifyContent={{ base: 'flex-start', sm: 'center', lg: 'center' }}
       overflow="auto"
     >
       <Box
-        minW="17rem"
+        minW={{ base: '16rem', lg: '18rem' }}
         display="flex"
         flexDir="column"
         justifyContent="space-between"
@@ -39,7 +40,7 @@ export function Summary() {
         justifyContent="space-between"
         padding="1.5rem 1rem"
         bg="gray5"
-        minW="17rem"
+        minW={{ base: '16rem', lg: '18rem' }}
         borderRadius="6px"
       >
         <Box display="flex" alignItems="center" justifyContent="space-between">

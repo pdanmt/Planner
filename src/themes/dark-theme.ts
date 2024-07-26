@@ -23,6 +23,6 @@ export const DarkTheme = extendTheme({
     yellow: '#fba94c',
   },
   breakpoints: {
-    sm: '560px',
+    sm: '540px',
   },
 })
