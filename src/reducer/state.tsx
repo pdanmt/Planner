@@ -16,21 +16,23 @@ export function ElementsState(state: FormData[], action: any) {
       })
     }
     case 'MARK_AS_FINISHED': {
-      const indexItemToRemove = state.findIndex(
-        ({ id }) => id === action.payload,
-      )
+      const indexItem = state.findIndex(({ id }) => id === action.payload)
 
       return produce(state, (draft) => {
         const indexItemMarkAsFinished = draft.find(
           ({ id }) => id === action.payload,
         )
-        draft.splice(indexItemToRemove, 1)
+        draft.splice(indexItem, 1)
 
         if (indexItemMarkAsFinished) {
-          indexItemMarkAsFinished.isFinished =
-            !indexItemMarkAsFinished.isFinished
+          if (state[indexItem].isFinished === false) {
+            indexItemMarkAsFinished.isFinished = true
 
-          draft.push(indexItemMarkAsFinished)
+            draft.push(indexItemMarkAsFinished)
+          } else {
+            indexItemMarkAsFinished.isFinished = false
+            draft.unshift(indexItemMarkAsFinished)
+          }
         }
       })
     }
