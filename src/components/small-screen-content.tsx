@@ -1,6 +1,6 @@
 import { Box, Icon, Text } from '@chakra-ui/react'
 import { useContext } from 'react'
-import { AddElementContext } from '../contexts/add-element-context'
+import { AddElementContext } from '../contexts/element-context'
 import { CheckFat, Trash, X } from '@phosphor-icons/react'
 import { ContentModal } from './content-modal'
 
@@ -54,6 +54,7 @@ export function SmallScreenContent() {
                   task={addActivities}
                   selectedSubject={selectedSubject}
                   createdAt={createdAt}
+                  id={id}
                 />
                 {isFinished ? (
                   <Icon

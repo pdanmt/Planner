@@ -1,7 +1,7 @@
 import { Box, Icon, Text } from '@chakra-ui/react'
 import { CheckFat, X } from '@phosphor-icons/react'
 import { useContext } from 'react'
-import { AddElementContext } from '../contexts/add-element-context'
+import { AddElementContext } from '../contexts/element-context'
 
 export function Summary() {
   const { elements } = useContext(AddElementContext)

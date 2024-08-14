@@ -8,7 +8,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useContext } from 'react'
-import { AddElementContext } from '../contexts/add-element-context'
+import { AddElementContext } from '../contexts/element-context'
 
 export function Planner() {
   const { elements } = useContext(AddElementContext)

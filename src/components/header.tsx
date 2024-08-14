@@ -17,7 +17,7 @@ import {
 import { ToolTipComponent } from './tooltip'
 import { CustomNavLink } from './custom-navlink'
 import { useContext } from 'react'
-import { AddElementContext } from '../contexts/add-element-context'
+import { AddElementContext } from '../contexts/element-context'
 
 export function Header() {
   const { SetHighContrast, highContrast } = useContext(AddElementContext)
@@ -52,7 +52,12 @@ export function Header() {
           >
             <Icon as={List} color="white" fontSize={22} />
           </MenuButton>
-          <MenuList bg="primary" border="1px solid" borderColor="gray4">
+          <MenuList
+            bg="primary"
+            border="1px solid"
+            borderColor="gray4"
+            w="120%"
+          >
             <MenuItem
               bg="primary"
               border="2px solid transparent"

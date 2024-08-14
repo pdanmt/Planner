@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { AddElementContext } from '../contexts/add-element-context'
+import { AddElementContext } from '../contexts/element-context'
 
 export interface FormData {
   addActivities: string
@@ -46,6 +46,7 @@ export function AddElement() {
 
   function handleAddElementInPlanner(data: FormData) {
     dispatchAddElement(data)
+
     reset()
   }
   return (

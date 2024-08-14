@@ -16,12 +16,30 @@ export function ElementsState(state: FormData[], action: any) {
       })
     }
     case 'MARK_AS_FINISHED': {
-      const indexItemMarkAsFinished = state.findIndex(
+      const indexItemToRemove = state.findIndex(
         ({ id }) => id === action.payload,
       )
+
       return produce(state, (draft) => {
-        draft[indexItemMarkAsFinished].isFinished =
-          !draft[indexItemMarkAsFinished].isFinished
+        const indexItemMarkAsFinished = draft.find(
+          ({ id }) => id === action.payload,
+        )
+        draft.splice(indexItemToRemove, 1)
+
+        if (indexItemMarkAsFinished) {
+          indexItemMarkAsFinished.isFinished =
+            !indexItemMarkAsFinished.isFinished
+
+          draft.push(indexItemMarkAsFinished)
+        }
+      })
+    }
+    case 'CHANGE_ELEMENT': {
+      const indexItemChange = state.findIndex(
+        ({ id }) => id === action.payload.id,
+      )
+      return produce(state, (draft) => {
+        draft[indexItemChange].contentTask = action.payload.contentTaskArea
       })
     }
   }

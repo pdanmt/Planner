@@ -2,7 +2,7 @@ import { Box, Table, Tbody, Tr, Td, Icon } from '@chakra-ui/react'
 import { X, CheckFat, Trash } from '@phosphor-icons/react'
 import { ContentModal } from './content-modal'
 import { useContext } from 'react'
-import { AddElementContext } from '../contexts/add-element-context'
+import { AddElementContext } from '../contexts/element-context'
 
 export function LargeScreenTable() {
   const {
@@ -90,6 +90,7 @@ export function LargeScreenTable() {
                     contentTask={contentTask}
                     selectedSubject={selectedSubject}
                     createdAt={createdAt}
+                    id={id}
                   />
                 </Td>
               </Tr>

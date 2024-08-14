@@ -1,4 +1,5 @@
 import { FormData } from '../components/add-element'
+import { dispatchElementProps } from '../contexts/element-context'
 
 export function addElementAction(data: FormData) {
   return {
@@ -18,5 +19,18 @@ export function markElementAsFinishedAction(id: number) {
   return {
     type: 'MARK_AS_FINISHED',
     payload: id,
+  }
+}
+
+export function changeElementAction({
+  contentTaskArea,
+  id,
+}: dispatchElementProps) {
+  return {
+    type: 'CHANGE_ELEMENT',
+    payload: {
+      id,
+      contentTaskArea,
+    },
   }
 }

@@ -7,6 +7,7 @@ import {
 } from 'react'
 import {
   addElementAction,
+  changeElementAction,
   markElementAsFinishedAction,
   removeElementAction,
 } from '../reducer/actions'
@@ -14,10 +15,16 @@ import { ElementsState } from '../reducer/state'
 import { FormData } from '../components/add-element'
 import { DateFormatter } from '../utils/formatter'
 
+export interface dispatchElementProps {
+  contentTaskArea: string
+  id: number
+}
+
 interface AddElementContextProps {
   dispatchAddElement: (data: FormData) => void
   dispatchRemoveElement: (id: number) => void
   dispatchMarkElementAsFinished: (id: number) => void
+  dispatchChangeElement: ({ contentTaskArea, id }: dispatchElementProps) => void
   HighContrast: (index: string) => string
   SetHighContrast: () => void
   elements: FormData[]
@@ -66,6 +73,13 @@ export function AddElementContextProvider({
     dispatch(markElementAsFinishedAction(id))
   }
 
+  function dispatchChangeElement({
+    contentTaskArea,
+    id,
+  }: dispatchElementProps) {
+    dispatch(changeElementAction({ id, contentTaskArea }))
+  }
+
   function HighContrast(index: string) {
     const colors = {
       matematica: '#3366CC',
@@ -108,6 +122,7 @@ export function AddElementContextProvider({
         HighContrast,
         SetHighContrast,
         highContrast,
+        dispatchChangeElement,
       }}
     >
       {children}
