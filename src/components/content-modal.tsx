@@ -76,7 +76,7 @@ export function ContentModal({
         <ModalOverlay background="#00000099" />
         <ModalContent background="primary" boxShadow="0 0 100px #28282b">
           <ModalHeader color="gray1">
-            <Box>
+            <Box maxW="93%">
               <Text>
                 {selectedSubject} - {task}
               </Text>

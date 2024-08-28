@@ -13,7 +13,7 @@ export function SmallScreenContent() {
   } = useContext(AddElementContext)
 
   return (
-    <Box display="flex" flexDir="column" gap="1rem">
+    <Box display="flex" flexDir="column" gap="1rem" pb="1rem">
       {elements.map(
         ({
           id,
