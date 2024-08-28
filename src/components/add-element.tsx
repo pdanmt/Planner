@@ -152,6 +152,7 @@ export function AddElement() {
               color="green1"
               fontWeight="bold"
               p="0 5rem"
+              w="86%"
               _hover={{ background: 'green2', color: '#fff' }}
             >
               Enviar
