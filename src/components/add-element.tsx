@@ -1,11 +1,10 @@
-import { Box, Button, Icon, Select } from '@chakra-ui/react'
+import { Box, Button, Select } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { AddElementContext } from '../contexts/element-context'
 import { AddElementInput } from './add-element-input'
-import { Swap } from '@phosphor-icons/react'
 
 export interface FormData {
   addActivities: string
@@ -17,23 +16,30 @@ export interface FormData {
   addSubject: string
 }
 
-interface storageData {
-  label: string
-  key: number
-}
+const options = [
+  { value: '1', label: 'Matemática' },
+  { value: '2', label: 'Português' },
+  { value: '3', label: 'Física' },
+  { value: '4', label: 'Biologia' },
+  { value: '5', label: 'Geografia' },
+  { value: '6', label: 'Química' },
+  { value: '7', label: 'História' },
+  { value: '8', label: 'Sociologia' },
+  { value: '9', label: 'Ed.Física' },
+  { value: '10', label: 'Espanhol' },
+  { value: '11', label: 'Eletricidade' },
+  { value: '12', label: 'Eletrônica Digital' },
+  { value: '13', label: 'Desenho' },
+  { value: '14', label: 'Informática' },
+]
 
 export function AddElement() {
   const { dispatchAddElement } = useContext(AddElementContext)
-  const [modeChange, setModeChange] = useState(true)
-  const [storage, setStorage] = useState<storageData[]>(
-    JSON.parse(localStorage.getItem('planner-1.0:subjects') || '[]'),
-  )
 
   const plannerInputsSchema = z.object({
     addActivities: z.string().optional(),
     selectedSubject: z.string().optional(),
     contentTask: z.string().optional(),
-    addSubject: z.string().optional(),
   })
 
   const addElementForm = useForm<FormData>({
@@ -43,39 +49,7 @@ export function AddElement() {
   const { handleSubmit, register, reset } = addElementForm
 
   function handleAddElementInPlanner(data: FormData) {
-    if (data.addSubject) {
-      const storageLocal = localStorage.getItem('planner-1.0:subjects')
-
-      if (storageLocal !== null) {
-        localStorage.setItem(
-          'planner-1.0:subjects',
-          JSON.stringify([
-            ...JSON.parse(storageLocal),
-            { label: data.addSubject, key: new Date().getTime() },
-          ]),
-        )
-      } else {
-        localStorage.setItem(
-          'planner-1.0:subjects',
-          JSON.stringify([
-            { label: data.addSubject, key: new Date().getTime() },
-          ]),
-        )
-      }
-
-      setStorage((state) => [
-        ...state,
-        { key: new Date().getTime(), label: data.addSubject },
-      ])
-    } else {
-      dispatchAddElement(data)
-    }
-
-    reset()
-  }
-
-  function handleModeChange() {
-    setModeChange((state) => !state)
+    dispatchAddElement(data)
 
     reset()
   }
@@ -92,51 +66,38 @@ export function AddElement() {
           w={{ base: '90%', md: '80%', lg: '70%' }}
           margin="0 auto 1rem"
         >
-          {modeChange && (
-            <>
-              <AddElementInput
-                placeholder="Adicione uma atividade"
-                registerName="addActivities"
-              />
-
-              <AddElementInput
-                placeholder="Digite o conteúdo da atividade"
-                registerName="contentTask"
-              />
-
-              <Select
-                {...register('selectedSubject')}
-                variant="ghost"
-                border="1px solid"
-                borderColor="primary"
-                background="transparent"
-                required
-                w={{ base: '90vw', md: '80vw', lg: '60vw' }}
-                placeholder={
-                  storage.length === 0
-                    ? 'Adicione uma matéria'
-                    : 'Selecione uma matéria'
-                }
-                sx={{
-                  option: {
-                    background: 'primary',
-                    color: 'gray2',
-                  },
-                }}
-              >
-                {storage.map(({ label, key }) => (
-                  <option key={key}>{label}</option>
-                ))}
-              </Select>
-            </>
-          )}
-
-          {!modeChange && (
+          <>
             <AddElementInput
-              placeholder="Adicione uma matéria"
-              registerName="addSubject"
+              placeholder="Adicione uma atividade"
+              registerName="addActivities"
             />
-          )}
+
+            <AddElementInput
+              placeholder="Digite o conteúdo da atividade"
+              registerName="contentTask"
+            />
+
+            <Select
+              {...register('selectedSubject')}
+              variant="ghost"
+              border="1px solid"
+              borderColor="primary"
+              background="transparent"
+              required
+              w={{ base: '90vw', md: '80vw', lg: '60vw' }}
+              sx={{
+                option: {
+                  background: 'primary',
+                  color: 'gray2',
+                },
+              }}
+            >
+              <option value="">Selecione uma matéria</option>
+              {options.map(({ label, value }) => (
+                <option key={value}>{label}</option>
+              ))}
+            </Select>
+          </>
 
           <Box
             display="flex"
@@ -157,12 +118,6 @@ export function AddElement() {
             >
               Enviar
             </Button>
-            <Icon
-              as={Swap}
-              fontSize={22}
-              _hover={{ color: 'green1' }}
-              onClick={() => handleModeChange()}
-            />
           </Box>
         </Box>
       </form>
