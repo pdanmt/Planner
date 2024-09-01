@@ -1,8 +1,9 @@
-import { Box, Table, Tbody, Tr, Td, Icon } from '@chakra-ui/react'
+import { Box, Table, Tbody, Tr, Td, Icon, Text } from '@chakra-ui/react'
 import { X, CheckFat, Trash } from '@phosphor-icons/react'
 import { ContentModal } from './content-modal'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
+import { options } from './add-element'
 
 export function LargeScreenTable() {
   const {
@@ -11,10 +12,6 @@ export function LargeScreenTable() {
     dispatchRemoveElement,
     HighContrast,
   } = useContext(AddElementContext)
-
-  const arrayUniqueSubjects = Array.from(
-    new Set(elements.map(({ selectedSubject }) => selectedSubject)),
-  )
 
   return (
     <Box
@@ -25,89 +22,111 @@ export function LargeScreenTable() {
     >
       <Table borderRadius="8px" variant="unstyled">
         <Tbody>
-          {arrayUniqueSubjects.map((subject) =>
-            elements.map(
-              ({
-                addActivities,
-                selectedSubject,
-                id,
-                isFinished,
-                contentTask,
-                createdAt,
-              }) => {
-                if (selectedSubject === subject) {
-                  return (
-                    <Tr
-                      borderTop="10px solid #202024"
-                      key={id}
-                      style={{
-                        textDecoration: isFinished ? 'line-through' : 'none',
-                        background: isFinished
-                          ? '#a5eea0'
-                          : HighContrast(
-                              selectedSubject
-                                .toLowerCase()
-                                .normalize('NFD')
-                                .replace(/\p{Mn}/gu, '')
-                                .replace(/\s+/g, '_'),
-                            ),
-                        opacity: isFinished ? '0.6' : '1',
-                      }}
-                    >
-                      <Td minW="20rem">{selectedSubject}</Td>
-                      <Td minW="20rem">{addActivities}</Td>
-                      <Td minW="1rem">
-                        {isFinished ? (
-                          <Icon
-                            as={X}
-                            color="red1"
-                            _hover={{
-                              color: 'red2',
-                            }}
-                            fontSize={20}
-                            cursor="pointer"
-                            onClick={() => dispatchMarkElementAsFinished(id)}
-                          />
-                        ) : (
-                          <Icon
-                            as={CheckFat}
-                            _hover={{
-                              color: 'green1',
-                            }}
-                            fontSize={20}
-                            cursor="pointer"
-                            onClick={() => dispatchMarkElementAsFinished(id)}
-                          />
-                        )}
-                      </Td>
-                      <Td minW="1rem">
-                        <Icon
-                          as={Trash}
-                          _hover={{
-                            color: 'red1',
+          {options.map(({ label }) => {
+            return (
+              <>
+                {elements
+                  .map(({ selectedSubject }) => selectedSubject)
+                  .includes(label) && (
+                  <Text
+                    fontSize="1.5rem"
+                    fontWeight="700"
+                    pt="2rem"
+                    display={{ base: 'none', lg: 'flex' }}
+                  >
+                    {label}
+                  </Text>
+                )}
+                {elements.map(
+                  ({
+                    addActivities,
+                    selectedSubject,
+                    id,
+                    isFinished,
+                    contentTask,
+                    createdAt,
+                  }) => {
+                    if (selectedSubject === label) {
+                      return (
+                        <Tr
+                          borderTop="10px solid #202024"
+                          key={id}
+                          style={{
+                            textDecoration: isFinished
+                              ? 'line-through'
+                              : 'none',
+                            background: isFinished
+                              ? '#a5eea0'
+                              : HighContrast(
+                                  selectedSubject
+                                    .toLowerCase()
+                                    .normalize('NFD')
+                                    .replace(/\p{Mn}/gu, '')
+                                    .replace(/\s+/g, '_'),
+                                ),
+                            opacity: isFinished ? '0.6' : '1',
                           }}
-                          fontSize={20}
-                          cursor="pointer"
-                          onClick={() => dispatchRemoveElement(id)}
-                        />
-                      </Td>
-                      <Td minW="1rem">
-                        <ContentModal
-                          task={addActivities}
-                          contentTask={contentTask}
-                          selectedSubject={selectedSubject}
-                          createdAt={createdAt}
-                          id={id}
-                        />
-                      </Td>
-                    </Tr>
-                  )
-                }
+                        >
+                          <Td minW="20rem">{selectedSubject}</Td>
+                          <Td minW="20rem">{addActivities}</Td>
+                          <Td minW="1rem">
+                            {isFinished ? (
+                              <Icon
+                                as={X}
+                                color="red1"
+                                _hover={{
+                                  color: 'red2',
+                                }}
+                                fontSize={20}
+                                cursor="pointer"
+                                onClick={() =>
+                                  dispatchMarkElementAsFinished(id)
+                                }
+                              />
+                            ) : (
+                              <Icon
+                                as={CheckFat}
+                                _hover={{
+                                  color: 'green1',
+                                }}
+                                fontSize={20}
+                                cursor="pointer"
+                                onClick={() =>
+                                  dispatchMarkElementAsFinished(id)
+                                }
+                              />
+                            )}
+                          </Td>
+                          <Td minW="1rem">
+                            <Icon
+                              as={Trash}
+                              _hover={{
+                                color: 'red1',
+                              }}
+                              fontSize={20}
+                              cursor="pointer"
+                              onClick={() => dispatchRemoveElement(id)}
+                            />
+                          </Td>
+                          <Td minW="1rem">
+                            <ContentModal
+                              task={addActivities}
+                              contentTask={contentTask}
+                              selectedSubject={selectedSubject}
+                              createdAt={createdAt}
+                              id={id}
+                            />
+                          </Td>
+                        </Tr>
+                      )
+                    }
 
-                return null
-              },
-            ),
-          )}
+                    return null
+                  },
+                )}
+              </>
+            )
+          })}
         </Tbody>
       </Table>
     </Box>

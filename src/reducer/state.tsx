@@ -5,6 +5,9 @@ export function ElementsState(state: FormData[], action: any) {
   switch (action.type) {
     case 'ADD_ELEMENT_IN_PLANNER':
       return produce(state, (draft) => {
+        console.log(state)
+        console.log(action.payload)
+
         draft.unshift(action.payload)
       })
     case 'REMOVE_ELEMENT_IN_PLANNER': {

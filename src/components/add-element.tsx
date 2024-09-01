@@ -16,7 +16,7 @@ export interface FormData {
   addSubject: string
 }
 
-const options = [
+export const options = [
   { value: '1', label: 'Matemática' },
   { value: '2', label: 'Português' },
   { value: '3', label: 'Física' },
