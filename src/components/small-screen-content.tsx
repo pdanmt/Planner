@@ -66,7 +66,7 @@ export function SmallScreenContent() {
                       p="1rem"
                     >
                       <Box display="flex" justifyContent="space-between">
-                        <Text fontSize="1.3rem">{addActivities}</Text>
+                        <Text fontSize="1.175rem">{addActivities}</Text>
                         <Box display="flex" alignItems="center" gap="1rem">
                           <ContentModal
                             contentTask={contentTask}
