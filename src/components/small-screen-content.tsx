@@ -109,8 +109,8 @@ export function SmallScreenContent() {
                         </Box>
                       </Box>
                       <Text>
-                        {contentTask.length >= 20
-                          ? contentTask.substring(0, 20).concat('...')
+                        {contentTask.length >= 33
+                          ? contentTask.substring(0, 33).concat('...')
                           : contentTask}
                       </Text>
                     </Box>
