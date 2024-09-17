@@ -1,17 +1,14 @@
 import { Box, Icon, Text } from '@chakra-ui/react'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
-import { CheckFat, Trash, X } from '@phosphor-icons/react'
+import { CheckFat, X } from '@phosphor-icons/react'
 import { ContentModal } from './content-modal'
 import { options } from './add-element'
+import { DeleteElementConfirmModal } from './delete-element-confirm-modal'
 
 export function SmallScreenContent() {
-  const {
-    elements,
-    dispatchMarkElementAsFinished,
-    dispatchRemoveElement,
-    HighContrast,
-  } = useContext(AddElementContext)
+  const { elements, dispatchMarkElementAsFinished, HighContrast } =
+    useContext(AddElementContext)
 
   return (
     <Box display="flex" flexDir="column" gap="1rem" pb="1rem">
@@ -97,15 +94,7 @@ export function SmallScreenContent() {
                               onClick={() => dispatchMarkElementAsFinished(id)}
                             />
                           )}
-                          <Icon
-                            as={Trash}
-                            _hover={{
-                              color: 'red1',
-                            }}
-                            fontSize={20}
-                            cursor="pointer"
-                            onClick={() => dispatchRemoveElement(id)}
-                          />
+                          <DeleteElementConfirmModal id={id} />
                         </Box>
                       </Box>
                       <Text>

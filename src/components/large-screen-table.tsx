@@ -1,17 +1,14 @@
 import { Box, Table, Tbody, Tr, Td, Icon, Text } from '@chakra-ui/react'
-import { X, CheckFat, Trash } from '@phosphor-icons/react'
+import { X, CheckFat } from '@phosphor-icons/react'
 import { ContentModal } from './content-modal'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
 import { options } from './add-element'
+import { DeleteElementConfirmModal } from './delete-element-confirm-modal'
 
 export function LargeScreenTable() {
-  const {
-    elements,
-    dispatchMarkElementAsFinished,
-    dispatchRemoveElement,
-    HighContrast,
-  } = useContext(AddElementContext)
+  const { elements, dispatchMarkElementAsFinished, HighContrast } =
+    useContext(AddElementContext)
 
   return (
     <Box
@@ -98,15 +95,7 @@ export function LargeScreenTable() {
                             )}
                           </Td>
                           <Td minW="1rem">
-                            <Icon
-                              as={Trash}
-                              _hover={{
-                                color: 'red1',
-                              }}
-                              fontSize={20}
-                              cursor="pointer"
-                              onClick={() => dispatchRemoveElement(id)}
-                            />
+                            <DeleteElementConfirmModal id={id} />
                           </Td>
                           <Td minW="1rem">
                             <ContentModal
