@@ -40,12 +40,19 @@ export function DeleteElementConfirmModal({
             Tem certeza que deseja deletar esta atividade?
           </ModalHeader>
           <ModalFooter display="flex" justifyContent="center" gap="1rem">
-            <Button bg="gray5" color="gray1" _hover={{ bg: 'gray6' }}>
+            <Button
+              bg="gray5"
+              color="gray1"
+              _hover={{ bg: 'gray6' }}
+              w="30%"
+              onClick={() => onClose()}
+            >
               Cancelar
             </Button>
             <Button
               bg="red1"
               color="gray1"
+              w="30%"
               _hover={{ bg: 'red2' }}
               onClick={() => dispatchRemoveElement(id)}
             >
