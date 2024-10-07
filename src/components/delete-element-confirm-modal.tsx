@@ -13,7 +13,7 @@ import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
 
 interface DeleteElementConfirmModalProps {
-  id: number
+  id: string
 }
 
 export function DeleteElementConfirmModal({

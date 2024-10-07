@@ -17,37 +17,36 @@ export function LargeScreenTable() {
       w="70%"
       margin="0 auto"
     >
-      <Table borderRadius="8px" variant="unstyled">
-        <Tbody>
-          {options.map(({ label }) => {
-            return (
-              <>
-                {elements
-                  .map(({ selectedSubject }) => selectedSubject)
-                  .includes(label) && (
-                  <Text
-                    fontSize="1.5rem"
-                    fontWeight="700"
-                    pt="2rem"
-                    display={{ base: 'none', lg: 'flex' }}
-                  >
-                    {label}
-                  </Text>
-                )}
-                {elements.map(
-                  ({
-                    addActivities,
-                    selectedSubject,
-                    id,
-                    isFinished,
-                    contentTask,
-                    createdAt,
-                  }) => {
-                    if (selectedSubject === label) {
-                      return (
+      {options.map(({ label, value }) => {
+        return (
+          <Box key={value}>
+            {elements
+              .map(({ selectedSubject }) => selectedSubject)
+              .includes(label) && (
+              <Text
+                fontSize="1.5rem"
+                fontWeight="700"
+                pt="2rem"
+                display={{ base: 'none', lg: 'flex' }}
+              >
+                {label}
+              </Text>
+            )}
+            {elements.map(
+              ({
+                addActivities,
+                selectedSubject,
+                id,
+                isFinished,
+                contentTask,
+                createdAt,
+              }) => {
+                if (selectedSubject === label) {
+                  return (
+                    <Table borderRadius="8px" variant="unstyled" key={id}>
+                      <Tbody>
                         <Tr
                           borderTop="10px solid #202024"
-                          key={id}
                           style={{
                             textDecoration: isFinished
                               ? 'line-through'
@@ -107,17 +106,17 @@ export function LargeScreenTable() {
                             />
                           </Td>
                         </Tr>
-                      )
-                    }
+                      </Tbody>
+                    </Table>
+                  )
+                }
 
-                    return null
-                  },
-                )}
-              </>
-            )
-          })}
-        </Tbody>
-      </Table>
+                return null
+              },
+            )}
+          </Box>
+        )
+      })}
     </Box>
   )
 }

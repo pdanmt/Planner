@@ -8,14 +8,21 @@ export function addElementAction(data: FormData) {
   }
 }
 
-export function removeElementAction(id: number) {
+export function initialElementsAction(data: FormData[]) {
+  return {
+    type: 'INITIAL_ELEMENTS',
+    payload: data,
+  }
+}
+
+export function removeElementAction(id: string) {
   return {
     type: 'REMOVE_ELEMENT_IN_PLANNER',
     payload: id,
   }
 }
 
-export function markElementAsFinishedAction(id: number) {
+export function markElementAsFinishedAction(id: string) {
   return {
     type: 'MARK_AS_FINISHED',
     payload: id,

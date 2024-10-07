@@ -1,19 +1,32 @@
 import { produce } from 'immer'
 import { FormData } from '../components/add-element'
+import {
+  addElementAcess,
+  changeElementAcess,
+  deleteElementAcess,
+  markElementAsFinishedAcess,
+} from '../services/acess/userAcess'
+import { useUser } from '../contexts/user-context'
 
 export function ElementsState(state: FormData[], action: any) {
+  const { user } = useUser()
+
   switch (action.type) {
     case 'ADD_ELEMENT_IN_PLANNER':
-      return produce(state, (draft) => {
-        console.log(state)
-        console.log(action.payload)
-
-        draft.unshift(action.payload)
+      addElementAcess({
+        data: action.payload,
+        user,
+        id: action.payload.id,
       })
+      return [...state, action.payload]
+    case 'INITIAL_ELEMENTS':
+      return action.payload
     case 'REMOVE_ELEMENT_IN_PLANNER': {
       const indexItemToRemove = state.findIndex(
         ({ id }) => id === action.payload,
       )
+
+      deleteElementAcess({ user, id: action.payload })
       return produce(state, (draft) => {
         draft.splice(indexItemToRemove, 1)
       })
@@ -31,9 +44,22 @@ export function ElementsState(state: FormData[], action: any) {
           if (state[indexItem].isFinished === false) {
             indexItemMarkAsFinished.isFinished = true
 
+            markElementAsFinishedAcess({
+              user,
+              id: action.payload,
+              isFinished: true,
+            })
+
             draft.push(indexItemMarkAsFinished)
           } else {
             indexItemMarkAsFinished.isFinished = false
+
+            markElementAsFinishedAcess({
+              user,
+              id: action.payload,
+              isFinished: false,
+            })
+
             draft.unshift(indexItemMarkAsFinished)
           }
         }
@@ -43,6 +69,13 @@ export function ElementsState(state: FormData[], action: any) {
       const indexItemChange = state.findIndex(
         ({ id }) => id === action.payload.id,
       )
+
+      changeElementAcess({
+        user,
+        id: action.payload.id,
+        contentTask: action.payload.contentTaskArea,
+      })
+
       return produce(state, (draft) => {
         draft[indexItemChange].contentTask = action.payload.contentTaskArea
       })

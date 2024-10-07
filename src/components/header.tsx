@@ -4,8 +4,10 @@ import {
   Icon,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuItem,
   MenuList,
+  Text,
 } from '@chakra-ui/react'
 import {
   BookmarkSimple,
@@ -13,13 +15,18 @@ import {
   ToggleLeft,
   List,
   ToggleRight,
+  SignOut,
 } from '@phosphor-icons/react'
 import { ToolTipComponent } from './tooltip'
 import { CustomNavLink } from './custom-navlink'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
+import { useUser } from '../contexts/user-context'
+import { MenuItemComponent } from './menu-item'
+import { handleSignOut } from '../firebase-config'
 
 export function Header() {
+  const { user } = useUser()
   const { SetHighContrast, highContrast } = useContext(AddElementContext)
 
   return (
@@ -52,29 +59,31 @@ export function Header() {
           >
             <Icon as={List} color="white" fontSize={22} />
           </MenuButton>
-          <MenuList
-            bg="primary"
-            border="1px solid"
-            borderColor="gray4"
-            w="120%"
-          >
+          <MenuList bg="primary" border="1px solid" borderColor="gray4">
             <MenuItem
               bg="primary"
               border="2px solid transparent"
               borderRadius="6px"
-              _hover={{ border: '2px solid', borderColor: 'gray2' }}
               display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              onClick={() => SetHighContrast()}
+              alignItems="left"
+              flexDir="column"
             >
+              <Text fontSize="1.2rem">{user.userName}</Text>
+              <Text color="gray3">{user.email}</Text>
+            </MenuItem>
+            <MenuDivider />
+            <MenuItemComponent fn={SetHighContrast}>
               Alto contraste
               {highContrast ? (
                 <ToggleRight size={22} />
               ) : (
                 <ToggleLeft size={22} />
               )}
-            </MenuItem>
+            </MenuItemComponent>
+            <MenuItemComponent color="red1" fn={handleSignOut}>
+              <Text>Sair da conta</Text>
+              <SignOut size={22} />
+            </MenuItemComponent>
           </MenuList>
         </Menu>
       </Box>

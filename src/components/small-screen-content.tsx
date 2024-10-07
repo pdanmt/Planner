@@ -11,10 +11,10 @@ export function SmallScreenContent() {
     useContext(AddElementContext)
 
   return (
-    <Box display="flex" flexDir="column" gap="1rem" pb="1rem">
-      {options.map(({ label }) => {
+    <>
+      {options.map(({ label, value }) => {
         return (
-          <>
+          <Box key={value} display="flex" flexDir="column" gap="1rem">
             {elements
               .map(({ selectedSubject }) => selectedSubject)
               .includes(label) && (
@@ -109,9 +109,9 @@ export function SmallScreenContent() {
                 return null
               },
             )}
-          </>
+          </Box>
         )
       })}
-    </Box>
+    </>
   )
 }

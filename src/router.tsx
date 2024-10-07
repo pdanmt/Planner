@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { PageBase } from './layouts/base'
 import { Home } from './pages/home'
 import { Planner } from './pages/planner-accordion-page'
+import { LoginPage } from './pages/login'
 
 export const AppRoutes = createBrowserRouter([
   {
@@ -17,5 +18,9 @@ export const AppRoutes = createBrowserRouter([
         element: <Planner />,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
   },
 ])

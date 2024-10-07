@@ -27,7 +27,7 @@ interface ContentModalProps {
   contentTask: string
   selectedSubject: string
   createdAt: string
-  id: number
+  id: string
 }
 
 export function ContentModal({
@@ -43,7 +43,7 @@ export function ContentModal({
 
   const contentSchema = z.object({
     contentTaskArea: z.string(),
-    id: z.number().default(id),
+    id: z.string().default(id),
   })
   type contentType = z.infer<typeof contentSchema>
   const { handleSubmit, register } = useForm<contentType>({

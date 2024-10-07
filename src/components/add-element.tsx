@@ -10,10 +10,9 @@ export interface FormData {
   addActivities: string
   selectedSubject: string
   contentTask: string
-  id: number
+  id: string
   isFinished: boolean
   createdAt: string
-  addSubject: string
 }
 
 export const options = [
@@ -48,7 +47,7 @@ export function AddElement() {
 
   const { handleSubmit, register, reset } = addElementForm
 
-  function handleAddElementInPlanner(data: FormData) {
+  async function handleAddElementInPlanner(data: FormData) {
     dispatchAddElement(data)
 
     reset()
