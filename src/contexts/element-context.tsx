@@ -70,22 +70,22 @@ export function AddElementContextProvider({
     data.id = String(id)
     data.isFinished = false
     data.createdAt = DateFormatter.format(new Date())
-    dispatch(addElementAction(data))
+    dispatch(addElementAction(data, user))
   }
 
   function dispatchRemoveElement(id: string) {
-    dispatch(removeElementAction(id))
+    dispatch(removeElementAction(id, user))
   }
 
   function dispatchMarkElementAsFinished(id: string) {
-    dispatch(markElementAsFinishedAction(id))
+    dispatch(markElementAsFinishedAction(id, user))
   }
 
   function dispatchChangeElement({
     contentTaskArea,
     id,
   }: dispatchElementProps) {
-    dispatch(changeElementAction({ id, contentTaskArea }))
+    dispatch(changeElementAction({ id, contentTaskArea }, user))
   }
 
   function HighContrast(index: string) {

@@ -63,8 +63,6 @@ export async function changeElementAcess({
   contentTask,
 }: userElementAcessProps) {
   if (user.id) {
-    console.log(user.id)
-
     const userReference = db.collection(user.id)
 
     await userReference.doc(id).update({ contentTask })
