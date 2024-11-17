@@ -1,3 +1,11 @@
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore'
 import { FormData } from '../../components/add-element'
 import { userType } from '../../contexts/user-context'
 import { db } from '../../firebase-config'
@@ -15,10 +23,8 @@ export async function addElementAcess({
   user,
   id,
 }: userElementAcessProps) {
-  if (user.id) {
-    const userReference = db.collection(user.id)
-
-    const response = await userReference.doc(id).set({ ...data })
+  if (user.id && id) {
+    const response = await setDoc(doc(db, user.id, id), { ...data })
 
     return response
   }
@@ -26,10 +32,10 @@ export async function addElementAcess({
 
 export async function getElementAcess({ user }: userElementAcessProps) {
   if (user.id) {
-    const userReference = db.collection(user.id)
+    const userReference = collection(db, user.id)
     const tasks: FormData[] = []
 
-    const response = await userReference.get()
+    const response = await getDocs(userReference)
 
     response.forEach((doc) => tasks.push(doc.data() as FormData))
 
@@ -39,9 +45,7 @@ export async function getElementAcess({ user }: userElementAcessProps) {
 
 export async function deleteElementAcess({ user, id }: userElementAcessProps) {
   if (user.id) {
-    const userReference = db.collection(user.id)
-
-    await userReference.doc(id).delete()
+    await deleteDoc(doc(db, `${user.id}/${id}`))
   }
 }
 
@@ -51,9 +55,7 @@ export async function markElementAsFinishedAcess({
   isFinished,
 }: userElementAcessProps) {
   if (user.id) {
-    const userReference = db.collection(user.id)
-
-    await userReference.doc(id).update({ isFinished })
+    await updateDoc(doc(db, `/${user.id}/${id}`), { isFinished })
   }
 }
 
@@ -63,8 +65,6 @@ export async function changeElementAcess({
   contentTask,
 }: userElementAcessProps) {
   if (user.id) {
-    const userReference = db.collection(user.id)
-
-    await userReference.doc(id).update({ contentTask })
+    await updateDoc(doc(db, `/${user.id}/${id}`), { contentTask })
   }
 }

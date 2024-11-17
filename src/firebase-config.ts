@@ -1,7 +1,14 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
+import { initializeApp } from 'firebase/app'
 import { userType } from './contexts/user-context'
+import {
+  browserLocalPersistence,
+  getAuth,
+  GoogleAuthProvider,
+  setPersistence,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -12,14 +19,16 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
 }
 
-firebase.initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig)
+export const auth = getAuth(app)
+export const db = getFirestore(app)
 
-export const provider = new firebase.auth.GoogleAuthProvider()
+export const provider = new GoogleAuthProvider()
 
 export function GetUser(
   setUser: React.Dispatch<React.SetStateAction<userType>>,
 ) {
-  firebase.auth().onAuthStateChanged((user) => {
+  auth.onAuthStateChanged((user) => {
     if (user) {
       setUser({
         email: user.email,
@@ -35,13 +44,12 @@ export function GetUser(
 
 export async function handleLogin() {
   try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    await firebase.auth().signInWithPopup(provider)
-
-    const currentUser = firebase.auth().currentUser
-    if (currentUser) {
-      window.location.replace('/')
-    }
+    await setPersistence(auth, browserLocalPersistence)
+    await signInWithPopup(auth, provider).then((user) => {
+      if (user) {
+        window.location.replace('/')
+      }
+    })
   } catch (error) {
     console.error(`Algo deu errado. Erro: ${error}`)
   }
@@ -56,15 +64,10 @@ export async function handleSignOut() {
     //   .then(() => {
     //     window.location.replace('/login')
     //   })
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        window.location.replace('/login')
-      })
+    await signOut(auth).then(() => {
+      window.location.replace('/login')
+    })
   } catch (error) {
     console.error(`Algo deu errado. Erro: ${error}`)
   }
 }
-
-export const db = firebase.firestore()
