@@ -17,7 +17,7 @@ A [agenda](https://planner-pdd.vercel.app) foi desenvolvida com as seguintes tec
 - [Firebase](https://firebase.google.com/)
 
 ## Como executar
-Para executar ou modificar o projeto por conta própria, basta:
+Para executar ou modificar o projeto por conta própria basta:
 
 ```bash
 # Fazer o clone do projeto
