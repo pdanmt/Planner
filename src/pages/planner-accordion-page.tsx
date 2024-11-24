@@ -9,15 +9,20 @@ import {
 } from '@chakra-ui/react'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
+import { Loading } from '../components/loading'
 
 export function Planner() {
-  const { elements } = useContext(AddElementContext)
+  const { elements, loading } = useContext(AddElementContext)
   const pendingElements = elements.filter(
     ({ isFinished }) => isFinished === false,
   )
   const arrayUniqueSubjects = Array.from(
     new Set(pendingElements.map(({ selectedSubject }) => selectedSubject)),
   )
+
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <Box w="90%" margin="0 auto">

@@ -30,6 +30,8 @@ interface AddElementContextProps {
   dispatchChangeElement: ({ contentTaskArea, id }: dispatchElementProps) => void
   HighContrast: (index: string) => string
   SetHighContrast: () => void
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  loading: boolean
   elements: FormData[]
   highContrast: boolean
 }
@@ -50,15 +52,17 @@ export function AddElementContextProvider({
   const [highContrast, setHighContrast] = useState(getLocalStorageHighContrast)
 
   const [elements, dispatch] = useReducer(ElementsState, [])
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchElements = async () => {
       if (user) {
-        const res = await getElementAcess({ user })
-
-        if (res) {
-          dispatch(initialElementsAction(res))
-        }
+        getElementAcess({ user }).then((res) => {
+          if (res) {
+            dispatch(initialElementsAction(res))
+            setLoading(false)
+          }
+        })
       }
     }
 
@@ -131,6 +135,8 @@ export function AddElementContextProvider({
         SetHighContrast,
         highContrast,
         dispatchChangeElement,
+        loading,
+        setLoading,
       }}
     >
       {children}

@@ -1,6 +1,21 @@
 import { extendTheme } from '@chakra-ui/react'
 
 export const DarkTheme = extendTheme({
+  styles: {
+    global: {
+      '::-webkit-scrollbar-track': {
+        background: '#313138',
+      },
+      '::-webkit-scrollbar': {
+        width: '8px',
+        background: '#8d8d99',
+      },
+      '::-webkit-scrollbar-thumb': {
+        background: '#8d8d99',
+        borderRadius: '10px',
+      },
+    },
+  },
   colors: {
     primary: '#121214',
     secondary: '#202024',
