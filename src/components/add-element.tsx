@@ -102,7 +102,6 @@ export function AddElement() {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            w="100%"
           >
             <Button
               variant="ghost"
@@ -112,7 +111,7 @@ export function AddElement() {
               color="green1"
               fontWeight="bold"
               p="0 5rem"
-              w="86%"
+              w="100%"
               _hover={{ background: 'green2', color: '#fff' }}
             >
               Enviar
