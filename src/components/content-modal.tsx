@@ -67,15 +67,16 @@ export function ContentModal({
       <Icon
         as={MagnifyingGlass}
         onClick={onOpen}
-        color="#fff"
+        color="fr"
         borderRadius="6px"
-        _hover={{ color: 'primary' }}
+        _hover={{ color: 'mutedFr' }}
         fontSize={22}
+        cursor="pointer"
       />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay background="#00000099" />
-        <ModalContent background="primary" boxShadow="0 0 100px #28282b">
-          <ModalHeader color="gray1">
+        <ModalContent background="primaryFr" boxShadow="0 0 100px #28282b">
+          <ModalHeader color="ring">
             <Box maxW="93%">
               <Text>
                 {selectedSubject} - {task}
@@ -85,15 +86,15 @@ export function ContentModal({
               </Text>
             </Box>
           </ModalHeader>
-          <ModalCloseButton color="#fff" position="absolute" top="1rem" />
+          <ModalCloseButton color="fr" position="absolute" top="1rem" />
           <form onSubmit={handleSubmit(handleChangeContentTask)}>
-            <ModalBody color="gray1">
+            <ModalBody color="mutedFr">
               <Textarea
                 variant="ghost"
                 bg="transparent"
                 border="2px solid"
-                borderColor="secondary"
-                _focus={{ borderColor: 'white' }}
+                borderColor="border"
+                _focus={{ borderColor: 'fr' }}
                 {...register('contentTaskArea')}
               />
             </ModalBody>
@@ -101,16 +102,16 @@ export function ContentModal({
               <Button
                 type="button"
                 onClick={onClose}
-                bg="gray6"
-                color="white"
-                _hover={{ bg: 'gray5' }}
+                bg="secondary"
+                color="fr"
+                _hover={{ bg: 'skeletonFr' }}
               >
                 Fechar
               </Button>
               <Button
                 type="submit"
                 bg="green1"
-                color="white"
+                color="fr"
                 _hover={{ bg: 'green2' }}
               >
                 Salvar

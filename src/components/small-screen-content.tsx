@@ -11,7 +11,7 @@ export function SmallScreenContent() {
     useContext(AddElementContext)
 
   return (
-    <>
+    <Box pb="2rem">
       {options.map(({ label, value }) => {
         return (
           <Box key={value} display="flex" flexDir="column" gap="1rem">
@@ -75,9 +75,9 @@ export function SmallScreenContent() {
                           {isFinished ? (
                             <Icon
                               as={X}
-                              color="red1"
+                              color="destructive"
                               _hover={{
-                                color: 'red2',
+                                color: 'destructive',
                               }}
                               fontSize={20}
                               cursor="pointer"
@@ -112,6 +112,6 @@ export function SmallScreenContent() {
           </Box>
         )
       })}
-    </>
+    </Box>
   )
 }

@@ -16,7 +16,7 @@ export function AddElementInput({
     <Input
       color="gray1"
       border="1px solid"
-      borderColor="primary"
+      borderColor="border"
       placeholder={placeholder}
       variant="ghost"
       bg="transparent"

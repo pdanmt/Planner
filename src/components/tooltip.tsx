@@ -16,6 +16,7 @@ export function ToolTipComponent({ children, label }: ToolTipComponentProps) {
       borderRadius="6px"
       bg="secondary"
       marginTop="0.8rem"
+      color="fr"
     >
       {children}
     </Tooltip>

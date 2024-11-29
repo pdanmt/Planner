@@ -27,7 +27,7 @@ export function DeleteElementConfirmModal({
       <Icon
         as={Trash}
         _hover={{
-          color: 'red1',
+          color: 'destructive',
         }}
         fontSize={20}
         cursor="pointer"
@@ -35,25 +35,26 @@ export function DeleteElementConfirmModal({
       />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay bg="#00000099" />
-        <ModalContent bg="primary" boxShadow="0 0 100px #28282b" color="gray1">
+        <ModalContent bg="primaryFr" boxShadow="0 0 100px #28282b" color="fr">
           <ModalHeader fontSize="1.2rem" textAlign="center">
             Tem certeza que deseja deletar esta atividade?
           </ModalHeader>
           <ModalFooter display="flex" justifyContent="center" gap="1rem">
             <Button
-              bg="gray5"
-              color="gray1"
-              _hover={{ bg: 'gray6' }}
+              bg="muted"
+              color="mutedFr"
+              _hover={{ bg: 'skeletonFr' }}
               w="30%"
               onClick={() => onClose()}
             >
               Cancelar
             </Button>
             <Button
-              bg="red1"
+              bg="destructive"
               color="gray1"
               w="30%"
-              _hover={{ bg: 'red2' }}
+              transition="0.2s"
+              _hover={{ filter: 'brightness(0.8)' }}
               onClick={() => dispatchRemoveElement(id)}
             >
               Deletar

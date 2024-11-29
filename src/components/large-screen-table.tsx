@@ -12,7 +12,7 @@ export function LargeScreenTable() {
 
   return (
     <Box
-      paddingTop="2rem"
+      p="2rem 0"
       display={{ base: 'none', lg: 'block' }}
       w="70%"
       margin="0 auto"
@@ -46,7 +46,8 @@ export function LargeScreenTable() {
                     <Table borderRadius="8px" variant="unstyled" key={id}>
                       <Tbody>
                         <Tr
-                          borderTop="10px solid #202024"
+                          borderTop="10px solid"
+                          borderColor="primaryFr"
                           style={{
                             textDecoration: isFinished
                               ? 'line-through'

@@ -28,11 +28,19 @@ export function Planner() {
     <Box w="90%" margin="0 auto">
       <Box paddingBottom="2rem">
         {pendingElements.length === 0 ? (
-          <Text fontSize="1.5rem" paddingBottom="1rem" textAlign="center">
+          <Text
+            fontSize={['1.2rem', '1.3rem', '1.5rem']}
+            paddingBottom="1rem"
+            textAlign="center"
+          >
             Nada para fazer...
           </Text>
         ) : (
-          <Text fontSize="1.5rem" paddingBottom="1rem">
+          <Text
+            fontSize={['1.2rem', '1.3rem', '1.5rem']}
+            paddingBottom="1rem"
+            textAlign="center"
+          >
             Matérias com atividades pendentes:
           </Text>
         )}
@@ -58,12 +66,12 @@ export function Planner() {
                   if (selectedSubject === arrayUniqueSubjects[index]) {
                     return (
                       <AccordionPanel key={id}>
-                        <Box p="1rem" bg="gray6" borderRadius="8px">
+                        <Box p="1rem" bg="secondary" borderRadius="8px">
                           <Text textAlign="justify">
                             <strong>{addActivities}:</strong> {contentTask}
                           </Text>
                           <Text
-                            color="gray3"
+                            color="mutedFr"
                             fontSize="0.8rem"
                             paddingTop="1rem"
                           >

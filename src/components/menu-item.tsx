@@ -14,10 +14,10 @@ export function MenuItemComponent({
 }: MenuItemComponentProps) {
   return (
     <MenuItem
-      bg="primary"
+      bg="primaryFr"
       border="2px solid transparent"
       borderRadius="6px"
-      _hover={{ border: '2px solid', borderColor: 'gray2' }}
+      _hover={{ border: '2px solid', borderColor: 'border' }}
       display="flex"
       justifyContent="space-between"
       alignItems="center"

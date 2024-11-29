@@ -22,16 +22,21 @@ export function Summary() {
         flexDir="column"
         justifyContent="space-between"
         padding="1.5rem 1rem"
-        bg="gray5"
+        bg="muted"
         borderRadius="6px"
         h="7.5rem"
       >
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Text>Atividades concluídas</Text>
-          <Icon as={CheckFat} fontSize={22} color="green1" />
+          <Icon as={CheckFat} fontSize={22} color="sucess" />
         </Box>
         {loading ? (
-          <Skeleton h="1.5rem" w="3rem" startColor="gray3" endColor="gray5" />
+          <Skeleton
+            h="1.5rem"
+            w="3rem"
+            startColor="skeleton"
+            endColor="skeletonFr"
+          />
         ) : (
           <Text fontSize="2rem" fontWeight="bold">
             {concludedTasks.length}
@@ -44,17 +49,22 @@ export function Summary() {
         flexDir="column"
         justifyContent="space-between"
         padding="1.5rem 1rem"
-        bg="gray5"
+        bg="muted"
         minW={{ base: '16rem', lg: '18rem' }}
         borderRadius="6px"
         h="7.5rem"
       >
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Text>Atividades não feitas </Text>
-          <Icon as={X} fontSize={22} color="red1" />
+          <Icon as={X} fontSize={22} color="destructive" />
         </Box>
         {loading ? (
-          <Skeleton h="1.5rem" w="3rem" startColor="gray3" endColor="gray5" />
+          <Skeleton
+            h="1.5rem"
+            w="3rem"
+            startColor="skeleton"
+            endColor="skeletonFr"
+          />
         ) : (
           <Text fontSize="2rem" fontWeight="bold">
             {elements.length - concludedTasks.length}

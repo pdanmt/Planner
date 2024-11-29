@@ -1,28 +1,48 @@
 import { extendTheme } from '@chakra-ui/react'
 
 export const LightTheme = extendTheme({
+  styles: {
+    global: {
+      'button, input, textarea, input::placeholder': {
+        color: '#030712',
+      },
+    },
+  },
   colors: {
-    primary: '#FAF9F6',
-    secondary: 'red',
-    white: '#fff',
+    bg: '#cfcfcf',
+    fr: '#030712',
 
-    red1: '#f03847',
-    red2: '#7A1921',
+    card: '#fff',
+    cardFr: '#030712',
 
+    popover: '#fff',
+    popoverFr: '#030712',
+
+    primary: '#111827',
+    primaryFr: '#f9fafb',
+
+    secondary: '#f3f4f6',
+    secondaryFr: '#111827',
+
+    muted: '#f3f4f6',
+    mutedFr: '#6b7280',
+
+    accent: '#f3f4f6',
+    accentFr: '#111827',
+
+    destructive: '#ef4444',
+    destructiveFr: '#f9fafb',
+
+    border: '#e5e7eb',
+    input: '#e5e7eb',
+    ring: '#030712',
+    sucess: '#04b63f',
+    sucess1: '#77dd77',
+    skeleton: '#dbd8d8',
+    skeletonFr: '#e5e7eb',
     green1: '#00b37e',
     green2: '#00875f',
     green3: '#015f43',
-
-    gray1: '#e1e1e6',
-    gray2: '#c4c4cc',
-    gray3: '#8d8d99',
-    gray4: '#7c7c8a',
-    gray5: '#313138',
-    gray6: '#29292e',
-
-    yellow: '#fba94c',
-  },
-  breakpoints: {
-    sm: '560px',
+    defaultHighConstrast: '#cfcfcf',
   },
 })

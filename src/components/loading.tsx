@@ -12,7 +12,7 @@ export function Loading() {
       alignItems="center"
       justifyContent="center"
     >
-      <OrbitProgress color={theme.colors.gray4} size="small" />
+      <OrbitProgress color={theme.colors.border} size="small" />
     </Box>
   )
 }

@@ -17,6 +17,7 @@ import { FormData } from '../components/add-element'
 import { DateFormatter } from '../utils/formatter'
 import { getElementAcess } from '../services/acess/userAcess'
 import { useUser } from './user-context'
+import { useTheme } from '@chakra-ui/react'
 
 export interface dispatchElementProps {
   contentTaskArea: string
@@ -46,6 +47,7 @@ export function AddElementContextProvider({
   children,
 }: AddElementContextProviderProps) {
   const { user } = useUser()
+  const theme = useTheme()
 
   const getLocalStorageHighContrast =
     localStorage.getItem('planner-1.0:high-contrast') === 'true'
@@ -113,7 +115,7 @@ export function AddElementContextProvider({
     if (highContrast) {
       return colors[index as keyof typeof colors]
     }
-    return '#313138'
+    return theme.colors.defaultHighConstrast
   }
 
   function SetHighContrast() {

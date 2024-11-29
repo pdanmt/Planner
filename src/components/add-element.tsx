@@ -80,14 +80,14 @@ export function AddElement() {
               {...register('selectedSubject')}
               variant="ghost"
               border="1px solid"
-              borderColor="primary"
+              borderColor="border"
               background="transparent"
               required
               w={{ base: '90vw', md: '80vw', lg: '60vw' }}
               sx={{
                 option: {
-                  background: 'primary',
-                  color: 'gray2',
+                  background: 'bg',
+                  color: 'fr',
                 },
               }}
             >
