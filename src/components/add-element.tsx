@@ -30,6 +30,7 @@ export const options = [
   { value: '12', label: 'Eletrônica Digital' },
   { value: '13', label: 'Desenho' },
   { value: '14', label: 'Informática' },
+  { value: '15', label: 'Filosofia' },
 ]
 
 export function AddElement() {

@@ -11,13 +11,16 @@ export function LoginPage() {
       justifyContent="center"
       alignItems="center"
       minH="100vh"
+      textAlign="center"
     >
       <Text fontSize="1.3rem">Faça login na sua conta para continuar.</Text>
       <Button
         display="flex"
         alignItems="center"
         gap="0.5rem"
-        bg="#f1f1f1"
+        bg="muted"
+        color="fr"
+        _hover={{ bg: 'popover' }}
         onClick={() => handleLogin()}
       >
         <Text>Login com</Text>
