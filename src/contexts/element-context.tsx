@@ -113,6 +113,7 @@ export function AddElementContextProvider({
       desenho: '#CC6600',
       informatica: '#999999',
       filosofia: '#003366',
+      ingles: '#e77992',
     }
 
     const lightModeColors = {
@@ -131,6 +132,7 @@ export function AddElementContextProvider({
       desenho: '#FFB380',
       informatica: '#CCCCCC',
       filosofia: '#A3C6FF',
+      ingles: '#e894a8',
     }
 
     if (highContrast) {

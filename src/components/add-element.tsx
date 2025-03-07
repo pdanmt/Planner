@@ -31,6 +31,7 @@ export const options = [
   { value: '13', label: 'Desenho' },
   { value: '14', label: 'Informática' },
   { value: '15', label: 'Filosofia' },
+  { value: '16', label: 'Inglês' },
 ]
 
 export function AddElement() {
