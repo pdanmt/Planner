@@ -23,11 +23,12 @@ import { toast } from 'sonner'
 
 export function AddSubject() {
   const [subject, setSubject] = useState<string>('')
-  const [hue, setHue] = useState<number>(0)
+  const [hue, setHue] = useState<number>(180)
+  const [saturation, setSaturation] = useState<number>(50)
   const { onClose, onOpen, isOpen } = useDisclosure()
   const { user } = useUser()
 
-  const color = `hsl(${hue}, 100%, 50%)`
+  const color = `hsl(${hue}, 100%, ${saturation}%)`
 
   async function handleAddSubject() {
     try {
@@ -77,13 +78,15 @@ export function AddSubject() {
               required
               onChange={(e) => setSubject(e.target.value)}
             />
+
+            {/* color slider */}
             <Slider
               min={0}
               max={360}
               value={hue}
               onChange={(val) => setHue(val)}
               w="100%"
-              my="1.5rem"
+              my="1rem"
             >
               <SliderThumb
                 bg={color}
@@ -93,6 +96,26 @@ export function AddSubject() {
               <SliderTrack
                 h="8px"
                 bg="linear-gradient(to right, red, yellow, lime, cyan, blue, magenta, red)"
+              />
+            </Slider>
+
+            {/* saturation slider */}
+            <Slider
+              min={0}
+              max={100}
+              value={saturation}
+              onChange={(val) => setSaturation(val)}
+              w="100%"
+              mb="1rem"
+            >
+              <SliderThumb
+                bg={color}
+                boxSize={4}
+                _focus={{ border: '2px solid', borderColor: 'fr' }}
+              />
+              <SliderTrack
+                h="8px"
+                bg={`linear-gradient(to right, hsl(${hue}, 100%, 0%), hsl(${hue}, 100%, 50%), hsl(${hue}, 100%, 100%))`}
               />
             </Slider>
 
