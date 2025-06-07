@@ -3,11 +3,10 @@ import { X, CheckFat } from '@phosphor-icons/react'
 import { ContentModal } from './content-modal'
 import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
-import { options } from './add-element'
 import { DeleteElementConfirmModal } from './delete-element-confirm-modal'
 
 export function LargeScreenTable() {
-  const { elements, dispatchMarkElementAsFinished, HighContrast } =
+  const { elements, dispatchMarkElementAsFinished, subjects, highContrast } =
     useContext(AddElementContext)
 
   return (
@@ -17,19 +16,19 @@ export function LargeScreenTable() {
       w="70%"
       margin="0 auto"
     >
-      {options.map(({ label, value }) => {
+      {subjects.map(([subject, color]) => {
         return (
-          <Box key={value}>
+          <Box key={subject}>
             {elements
               .map(({ selectedSubject }) => selectedSubject)
-              .includes(label) && (
+              .includes(subject) && (
               <Text
                 fontSize="1.5rem"
                 fontWeight="700"
                 pt="2rem"
                 display={{ base: 'none', lg: 'flex' }}
               >
-                {label}
+                {subject}
               </Text>
             )}
             {elements.map(
@@ -41,31 +40,27 @@ export function LargeScreenTable() {
                 contentTask,
                 createdAt,
               }) => {
-                if (selectedSubject === label) {
+                if (selectedSubject === subject) {
                   return (
                     <Table borderRadius="8px" variant="unstyled" key={id}>
                       <Tbody>
                         <Tr
                           borderTop="10px solid"
                           borderColor="primaryFr"
-                          style={{
-                            textDecoration: isFinished
-                              ? 'line-through'
-                              : 'none',
-                            background: isFinished
+                          textDecor={isFinished ? 'line-through' : 'none'}
+                          bg={
+                            isFinished
                               ? '#a5eea0'
-                              : HighContrast(
-                                  selectedSubject
-                                    .toLowerCase()
-                                    .normalize('NFD')
-                                    .replace(/\p{Mn}/gu, '')
-                                    .replace(/\s+/g, '_'),
-                                ),
-                            opacity: isFinished ? '0.6' : '1',
-                          }}
+                              : highContrast
+                                ? 'muted'
+                                : color
+                          }
+                          opacity={isFinished ? '0.6' : '1'}
                         >
-                          <Td minW="20rem">{selectedSubject}</Td>
                           <Td minW="20rem">{addActivities}</Td>
+                          <Td minW="20rem">
+                            {contentTask.slice(0, 30).concat('...')}
+                          </Td>
                           <Td minW="1rem">
                             {isFinished ? (
                               <Icon

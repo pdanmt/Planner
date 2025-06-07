@@ -10,6 +10,7 @@ export function ErrorPage() {
       display="flex"
       alignItems="center"
       justifyContent="center"
+      textAlign="center"
       flexDir="column"
       minH="100vh"
     >

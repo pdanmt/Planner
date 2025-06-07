@@ -30,16 +30,37 @@ export async function addElementAcess({
   }
 }
 
+export async function addSubject(
+  subject: string,
+  color: string,
+  user: userType,
+) {
+  if (user.id) {
+    const response = await updateDoc(doc(db, user.id, 'subjects'), {
+      [subject]: color,
+    })
+
+    return response
+  }
+}
+
 export async function getElementAcess({ user }: userElementAcessProps) {
   if (user.id) {
     const userReference = collection(db, user.id)
     const tasks: FormData[] = []
+    const subjects: [string, string][] = []
 
     const response = await getDocs(userReference)
 
-    response.forEach((doc) => tasks.push(doc.data() as FormData))
+    response.forEach((doc) => {
+      if (doc.id === 'subjects') {
+        Object.entries(doc.data()).map((data) => subjects.push(data))
+      } else {
+        tasks.push(doc.data() as FormData)
+      }
+    })
 
-    return tasks
+    return [tasks, subjects]
   }
 }
 

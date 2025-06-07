@@ -79,9 +79,9 @@ export function Header() {
             <MenuItemComponent fn={SetHighContrast}>
               Alto contraste
               {highContrast ? (
-                <ToggleRight size={22} />
-              ) : (
                 <ToggleLeft size={22} />
+              ) : (
+                <ToggleRight size={22} />
               )}
             </MenuItemComponent>
             <MenuItemComponent fn={changeTheme}>

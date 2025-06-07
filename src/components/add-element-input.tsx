@@ -1,7 +1,7 @@
-import { Input } from '@chakra-ui/react'
+import { Input, InputProps } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 
-interface AddElementInputProps {
+interface AddElementInputProps extends InputProps {
   registerName: string
   placeholder: string
 }
@@ -9,6 +9,7 @@ interface AddElementInputProps {
 export function AddElementInput({
   registerName,
   placeholder,
+  ...props
 }: AddElementInputProps) {
   const { register } = useFormContext()
 
@@ -23,6 +24,7 @@ export function AddElementInput({
       w={{ base: '90vw', md: '80vw', lg: '60vw' }}
       required
       {...register(registerName)}
+      {...props}
     />
   )
 }

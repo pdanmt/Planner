@@ -1,10 +1,11 @@
-import { Box, Button, Select } from '@chakra-ui/react'
+import { Button, Flex, Select } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { AddElementContext } from '../contexts/element-context'
 import { AddElementInput } from './add-element-input'
+import { AddSubject } from './add-subject'
 
 export interface FormData {
   addActivities: string
@@ -15,27 +16,8 @@ export interface FormData {
   createdAt: string
 }
 
-export const options = [
-  { value: '1', label: 'Matemática' },
-  { value: '2', label: 'Português' },
-  { value: '3', label: 'Física' },
-  { value: '4', label: 'Biologia' },
-  { value: '5', label: 'Geografia' },
-  { value: '6', label: 'Química' },
-  { value: '7', label: 'História' },
-  { value: '8', label: 'Sociologia' },
-  { value: '9', label: 'Ed.Física' },
-  { value: '10', label: 'Espanhol' },
-  { value: '11', label: 'Eletricidade' },
-  { value: '12', label: 'Eletrônica Digital' },
-  { value: '13', label: 'Desenho' },
-  { value: '14', label: 'Informática' },
-  { value: '15', label: 'Filosofia' },
-  { value: '16', label: 'Inglês' },
-]
-
 export function AddElement() {
-  const { dispatchAddElement } = useContext(AddElementContext)
+  const { dispatchAddElement, subjects } = useContext(AddElementContext)
 
   const plannerInputsSchema = z.object({
     addActivities: z.string().optional(),
@@ -50,7 +32,13 @@ export function AddElement() {
   const { handleSubmit, register, reset } = addElementForm
 
   async function handleAddElementInPlanner(data: FormData) {
-    dispatchAddElement(data)
+    if (
+      data.addActivities !== '' ||
+      data.contentTask !== '' ||
+      data.selectedSubject !== ''
+    ) {
+      dispatchAddElement(data)
+    }
 
     reset()
   }
@@ -58,53 +46,45 @@ export function AddElement() {
   return (
     <FormProvider {...addElementForm}>
       <form onSubmit={handleSubmit(handleAddElementInPlanner)}>
-        <Box
-          display="flex"
-          alignItems="center"
-          flexDir={{ base: 'column', lg: 'row' }}
-          justifyContent="center"
+        <Flex
+          align="center"
+          direction={{ base: 'column', lg: 'row' }}
+          justify="center"
           gap="1rem"
           w={{ base: '90%', md: '80%', lg: '70%' }}
-          margin="0 auto 1rem"
+          m="0 auto 1rem"
         >
-          <>
-            <AddElementInput
-              placeholder="Adicione uma atividade"
-              registerName="addActivities"
-            />
+          <AddElementInput
+            placeholder="Adicione uma atividade"
+            registerName="addActivities"
+          />
 
-            <AddElementInput
-              placeholder="Digite o conteúdo da atividade"
-              registerName="contentTask"
-            />
+          <AddElementInput
+            placeholder="Digite o conteúdo da atividade"
+            registerName="contentTask"
+          />
 
-            <Select
-              {...register('selectedSubject')}
-              variant="ghost"
-              border="1px solid"
-              borderColor="border"
-              background="transparent"
-              required
-              w={{ base: '90vw', md: '80vw', lg: '60vw' }}
-              sx={{
-                option: {
-                  background: 'bg',
-                  color: 'fr',
-                },
-              }}
-            >
-              <option value="">Selecione uma matéria</option>
-              {options.map(({ label, value }) => (
-                <option key={value}>{label}</option>
-              ))}
-            </Select>
-          </>
-
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
+          <Select
+            {...register('selectedSubject')}
+            variant="ghost"
+            border="1px solid"
+            borderColor="border"
+            background="transparent"
+            required
+            w={{ base: '90vw', md: '80vw', lg: '60vw' }}
+            sx={{
+              option: {
+                background: 'bg',
+                color: 'fr',
+              },
+            }}
           >
+            <option value="">Selecione uma matéria</option>
+            {subjects.map(([subject]) => (
+              <option key={subject}>{subject}</option>
+            ))}
+          </Select>
+          <Flex gap="1rem">
             <Button
               variant="ghost"
               type="submit"
@@ -112,14 +92,15 @@ export function AddElement() {
               borderColor="green2"
               color="green1"
               fontWeight="bold"
-              p="0 5rem"
-              w="100%"
+              minW="200px"
+              maxW="250px"
               _hover={{ background: 'green2', color: '#fff' }}
             >
               Enviar
             </Button>
-          </Box>
-        </Box>
+            <AddSubject />
+          </Flex>
+        </Flex>
       </form>
     </FormProvider>
   )

@@ -3,21 +3,20 @@ import { useContext } from 'react'
 import { AddElementContext } from '../contexts/element-context'
 import { CheckFat, X } from '@phosphor-icons/react'
 import { ContentModal } from './content-modal'
-import { options } from './add-element'
 import { DeleteElementConfirmModal } from './delete-element-confirm-modal'
 
 export function SmallScreenContent() {
-  const { elements, dispatchMarkElementAsFinished, HighContrast } =
+  const { elements, dispatchMarkElementAsFinished, subjects, highContrast } =
     useContext(AddElementContext)
 
   return (
     <Box pb="2rem">
-      {options.map(({ label, value }) => {
+      {subjects.map(([subject, color]) => {
         return (
-          <Box key={value} display="flex" flexDir="column" gap="1rem">
+          <Box key={subject} display="flex" flexDir="column" gap="1rem">
             {elements
               .map(({ selectedSubject }) => selectedSubject)
-              .includes(label) && (
+              .includes(subject) && (
               <Text
                 fontSize="1.5rem"
                 fontWeight="700"
@@ -25,7 +24,7 @@ export function SmallScreenContent() {
                 pt="1rem"
                 display={{ base: 'flex', lg: 'none' }}
               >
-                {label}
+                {subject}
               </Text>
             )}
             {elements.map(
@@ -37,26 +36,18 @@ export function SmallScreenContent() {
                 contentTask,
                 createdAt,
               }) => {
-                if (selectedSubject === label) {
+                if (selectedSubject === subject) {
                   return (
                     <Box
                       key={id}
                       display={{ base: 'flex', lg: 'none' }}
                       flexDir="column"
                       gap="1rem"
-                      style={{
-                        textDecoration: isFinished ? 'line-through' : 'none',
-                        background: isFinished
-                          ? '#a5eea0'
-                          : HighContrast(
-                              selectedSubject
-                                .toLowerCase()
-                                .normalize('NFD')
-                                .replace(/\p{Mn}/gu, '')
-                                .replace(/\s+/g, '_'),
-                            ),
-                        opacity: isFinished ? '0.6' : '1',
-                      }}
+                      textDecor={isFinished ? 'line-through' : 'none'}
+                      bg={
+                        isFinished ? '#a5eea0' : highContrast ? 'muted' : color
+                      }
+                      opacity={isFinished ? '0.6' : '1'}
                       w="95vw"
                       margin="0 auto"
                       borderRadius="6px"
